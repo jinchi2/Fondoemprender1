@@ -3,7 +3,6 @@ import generaId from "../helpers/generaId.js";
 import generarJWT from "../helpers/generarJWT.js";
 
 const registrar = async (req, res) => {
-
     //Enviar registros duplicados 
     const { email } = req.body;
     const existeUsuario = await Usuario.findOne({email})
@@ -22,7 +21,6 @@ const registrar = async (req, res) => {
     } catch (error) {
         console.log(error)
     }
-
 };
 const autenticar = async (req, res) => {
 

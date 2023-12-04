@@ -3,28 +3,28 @@ import { Link } from "react-router-dom"
 import Alerta from "../components/Alerta"
 import axios from 'axios'
 
-
+const TIPO_DOCUMENTO = ['tarjeta identidad', 'cedula ciudadana', 'cedula extrajeria']
 
 const Registrar = () => {
   const [ nombre, setNombre ] = useState('')
-  const [ Apellidos, setapellidos ] = useState('')
-  const [ NumeroDocumendo, setNumeroDocumendo ] = useState('')
-  const [ Tipoidentificacion, setTipoidentificacion ] = useState('')
-  const [ CorreoElectronico, setCorreoElectronico ] = useState('')
-  const [ Password, setPassword ] = useState('')
+  const [ apellidos, setapellidos ] = useState('')
+  const [ numerodocumento, setNumeroDocumento ] = useState('')
+  const [ tipoidentificacion, setTipoidentificacion ] = useState('')
+  const [ email, setEmail ] = useState('')
+  const [ password, setPassword ] = useState('')
   const [ alerta, setAlerta ] = useState({})
 
   const handleSubmit = async e => {
     e.preventDefault()
 
-    if ([nombre, Apellidos, NumeroDocumendo, Tipoidentificacion, CorreoElectronico, Password].includes('')) {
+    if ([nombre, apellidos, numerodocumento, tipoidentificacion, email, password].includes('')) {
       setAlerta({
         msg: 'Todos los campos son obligatorios',
         error:true
       })   
       return
     }      
-    if (Password.length < 6 ) {
+    if (password.length < 6 ) {
       setAlerta({
         msg: 'El password es muy corto, agrega minimo 6 carateres',
         error: true
@@ -36,8 +36,9 @@ const Registrar = () => {
     // Crear el usuario en la API
 
     try {
-      const respuesta = await axios.post('https://localhost:4000/api/usuarios', 
-      {nombre, Password, Apellidos, NumeroDocumendo, Tipoidentificacion, CorreoElectronico,})
+      const respuesta = await axios.post('http://localhost:4000/api/usuarios', 
+      {nombre, password, apellidos, numerodocumento, tipoidentificacion, email,})
+      console.log(respuesta)
     } catch (error) {
       console.log(error)
     }
@@ -81,7 +82,7 @@ const Registrar = () => {
               type="text"
               placeholder="apellidos"
               className='w-full mt-3 p-3 border rounded-xl bg-gray-50'
-              value={Apellidos}
+              value={apellidos}
               onChange={e => setapellidos(e.target.value)}
           /> 
           </div>
@@ -96,8 +97,8 @@ const Registrar = () => {
               type="number"
               placeholder="escribes tu numero documendo"
               className='w-full mt-3 p-3 border rounded-xl bg-gray-50'
-              value={NumeroDocumendo}
-              onChange={e => setNumeroDocumendo(e.target.value)}
+              value={numerodocumento}
+              onChange={e => setNumeroDocumento(e.target.value)}
           /> 
           </div>
 
@@ -111,13 +112,13 @@ const Registrar = () => {
               type="text"
               placeholder="escribes tu identificacion"
               className='w-full mt-3 p-3 border rounded-xl bg-gray-50'
-              value={Tipoidentificacion}
+              value={tipoidentificacion}
               onChange={e => setTipoidentificacion(e.target.value)}
              >
-            <option value="opcion1">Seleccione</option>
-            <option value="opcion2">CC</option>
-            <option value="opcion3">CE</option>
-            <option value="opcion4">TI</option>
+            <option value="">-- Seleccione --</option>
+            {TIPO_DOCUMENTO.map(option => (
+              <option key={option}> {option}</option>
+            ))}
             </select>
           </div>
 
@@ -131,8 +132,8 @@ const Registrar = () => {
               type="email"
               placeholder="escribe tu correo electronico"
               className='w-full mt-3 p-3 border rounded-xl bg-gray-50'
-              value={CorreoElectronico}
-              onChange={e => setCorreoElectronico(e.target.value)}
+              value={email}
+              onChange={e => setEmail(e.target.value)}
               
           /> 
           </div>
@@ -147,7 +148,7 @@ const Registrar = () => {
               type="password"
               placeholder="escribes tu password"
               className='w-full mt-3 p-3 border rounded-xl bg-gray-50'
-              value={Password}
+              value={password}
               onChange={e => setPassword(e.target.value)}
                 
           /> 
