@@ -1,6 +1,8 @@
 import Usuario from "../Models/Usuario.js";
 import generaId from "../helpers/generaId.js";
 import generarJWT from "../helpers/generarJWT.js";
+import { emailRegistro } from "../helpers/email.js";
+/*import { json } from "express";*/
 
 const registrar = async (req, res) => {
     //Enviar registros duplicados 
@@ -17,6 +19,14 @@ const registrar = async (req, res) => {
         const usuario = new Usuario(req.body);
         usuario.token = generaId()
         await usuario.save()
+
+        // Enviar el email de confirmacion
+        emailRegistro({
+            email: usuario.email,
+            nombre: usuario.nombre,
+            token: usuario.token
+        })
+
         res.json({msg: 'Usuario Creado Correctamente, Revisa tu email para confirmar tu cuenta'})
     } catch (error) {
         console.log(error)
