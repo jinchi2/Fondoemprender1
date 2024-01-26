@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { useParams, Link } from 'react-router-dom'
-import axios from 'axios'
 import Alerta from "../components/Alerta"
+import clienteAxios from "../config/clienteAxios"
 
 const ConfirmarCuenta = () => {
 
@@ -13,30 +13,33 @@ const ConfirmarCuenta = () => {
 
   const { id } = params
 
-  const { msg } = alerta
-  
-  useEffect (() => {
-    const confirmarCuenta = async () => {
-        try {
-          //TODO: Mover hacia un cliente Axios
-          const url = `http://localhost:4000/api/usuarios/confirmar/${id}`
-          const { data } = await axios(url)
 
-          setAlerta({
-            msg: data.msg,
-            error: false
-          })
-          setCuentaConfirmada(true)
-          
-        } catch (error) {
-          setAlerta({
-            msg: error.response.data.msg,
-            error: true
-          })
-        }
+  
+useEffect(() => {
+  const confirmarCuenta = async () => {
+    try {
+      const url = `/usuarios/confirmar/${id}`;
+      const { data } = await clienteAxios(url);
+
+      setAlerta({
+        msg: data.msg,
+        error: false
+      })
+      setCuentaConfirmada(true)
+
+    } catch (error) {
+      console.error('Error confirming account:', error);
+      setAlerta({
+        msg: error.response.data.msg,
+        error: true,
+      });
     }
-    confirmarCuenta()
-  }, [])
+  };
+
+  confirmarCuenta();
+}, []);
+const { msg } = alerta
+
 
   return (
     <>

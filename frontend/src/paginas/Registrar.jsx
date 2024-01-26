@@ -1,7 +1,8 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import Alerta from "../components/Alerta"
-import axios from "axios"
+/*import axios from 'axios'*/
+import clienteAxios from "../config/clienteAxios"
 
 const TIPO_DOCUMENTO = ['tarjeta identidad', 'cedula ciudadana', 'cedula extrajeria']
 
@@ -36,8 +37,8 @@ const Registrar = () => {
     // Crear el usuario en la API
 
     try {
-      //TODO: Mover hacia un cliente Axios
-      const { data } = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/usuarios`,
+      
+      const { data } = await clienteAxios.post(`/usuarios`,
         { nombre, password, apellidos, numerodocumento, tipoidentificacion, email })
         
         setAlerta({
