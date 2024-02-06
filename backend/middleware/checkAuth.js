@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken'
+import Usuario from '../models/Usuario.js'
 
-const checkAuth = (req, res, next) =>{
+const checkAuth = async (req, res, next) =>{
     let token
     if (
         req.headers.authorization &&
@@ -8,12 +9,18 @@ const checkAuth = (req, res, next) =>{
     ){
         try {
             token = req.headers.authorization.split(' ')[1]
-            console.log(token)
+            const decoded = jwt.verify(token, process.env.JWT_SECRET)
+            req.usuario = await Usuario.findById(decoded.id).select(
+                "-password -confirmado -token -createdAt -updatedAt -__V"
+                )
+            return next()    
         } catch (error) {
-            
+            return res.status(404).json({msg: 'Hubo un error'})
         }
     }
-    next()
+    if (!token){
+        const error = new Error("Token Invalido")
+    }
 }
 
 export default checkAuth

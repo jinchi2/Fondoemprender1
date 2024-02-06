@@ -1,4 +1,4 @@
-import Usuario from "../Models/Usuario.js";
+import Usuario from "../models/Usuario.js";
 import generaId from "../helpers/generaId.js";
 import generarJWT from "../helpers/generarJWT.js";
 import { emailRegistro, emailOlvidePassword } from "../helpers/email.js";
@@ -35,13 +35,14 @@ const registrar = async (req, res) => {
 const autenticar = async (req, res) => {
 
     const { email, password } = req.body
+    
     //Comprobar si el usuario existe
     const usuario = await Usuario.findOne({ email })
     if (!usuario) {
         const error = new Error("El Usuario no existe")
         return res.status(404).json({ msg: error.message })
     }
-
+    
     //Comprobar si el usuario esta confirmado
     if (!usuario.confirmado) {
         const error = new Error("Tu cuenta no ha sido confirmada")
@@ -135,7 +136,7 @@ const nuevoPassword = async (req, res) => {
 }
 const perfil = async (req, res) => {
     const { usuario } = req
-
+    
     res.json(usuario)
 }
 
