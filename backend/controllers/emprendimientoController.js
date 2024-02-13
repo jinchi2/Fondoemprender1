@@ -13,11 +13,11 @@ const obtenerEmprendimientos = async (req, res) => {
 
 const nuevoEmprendimiento = async (req, res) => {
     const emprendimiento = new Emprendimiento(req.body)
-    emprendimiento.creador = req.usuario._id
+   emprendimiento.creador = req.usuario._id
 
     try {
         const emprendimientoAlmacenado = await emprendimiento.save()
-        res.json(emprendimientoAlmacenado)
+       res.json(emprendimientoAlmacenado)
     } catch (error) {
         console.log(error)
     }
