@@ -9,9 +9,11 @@ import NuevoPassword from './paginas/NuevoPassword'
 import ConfimarCuenta from './paginas/ConfimarCuenta'
 import Proyectos from './paginas/Proyectos'
 import NuevoProyecto from './paginas/NuevoProyecto'
+import Emprendimiento from './paginas/Emprendimiento'
 
 import { AuthProvider } from './context/AuthProvider'
 import { ProyectosProvider } from './context/ProyectosProvider'
+
 
 
 function App() {
@@ -30,7 +32,8 @@ function App() {
             </Route>
             <Route path='/proyectos' element={<RutaProtegida />}>
                 <Route index element={<Proyectos />}/>
-                <Route path='crear-proyecto' element={<NuevoProyecto />}></Route>
+                <Route path='crear-proyecto' element={<NuevoProyecto />}/>
+                <Route path=':id' element={<Emprendimiento />}/>
 
             </Route>
           </Routes>
