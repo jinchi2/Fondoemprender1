@@ -15,13 +15,11 @@ const router = express.Router()
 /*router.get('/', checkAuth, obtenerEmprendimientos)
 router.post('/', checkAuth, nuevoEmprendimiento)*/
 
-router
-    .route('/')
+router.route('/')
     .get(checkAuth, obtenerEmprendimientos)
     .post(checkAuth, nuevoEmprendimiento)
 
-    router
-    .route('/:id')
+router.route('/:id')
     .get(checkAuth, obtenerEmprendimiento)
     .put(checkAuth, editarEmprendimiento)
     .delete(checkAuth, eliminarEmprendimiento)

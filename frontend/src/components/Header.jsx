@@ -10,7 +10,7 @@ const Header = () => {
         
             <input
                 type='search'
-                placeholder='Buscar Proyectos'
+                placeholder='Buscar Emprendimientos'
                 className='rounded-lg lg:w-96 block p-2 boder' />
             <div className='flex items-center gap-4'>
                 <Link

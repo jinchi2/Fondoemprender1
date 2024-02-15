@@ -1,11 +1,11 @@
-import React from 'react'
+import { Link } from "react-router-dom"
 
-const PreviewProyecto = ({Emprendimient}) => {
-    const { titulo, telefono, descripcion, direccion, imagen, beneficiario, presupuestos} = Emprendimient
+const PreviewProyecto = ({ proyecto }) => {
+  const { titulo } = proyecto
   return (
     <div>{titulo}c </div>
-      
-    
+
+
   )
 }
 

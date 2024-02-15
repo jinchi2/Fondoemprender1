@@ -1,62 +1,57 @@
 import { useState, useEffect, createContext } from "react";
 import clienteAxios from "../config/clienteAxios";
 import { useNavigate } from 'react-router-dom';
-import Emprendimiento from "../../../backend/models/Emprendimiento";
 
 const ProyectosContext = createContext()
 
-const ProyectosProvider = ({children}) => {
+const ProyectosProvider = ({ children }) => {
 
     const [proyectos, setProyectos] = useState([])
     const [alerta, setAlerta] = useState([])
-
     const navigate = useNavigate()
 
     useEffect(() => {
         const obtenerEmprendimientos = async () => {
             try {
                 const token = localStorage.getItem('token')
-                if(!token)return
-    
+                if (!token) return
+
                 const config = {
-                    headers:{
+                    headers: {
                         "content-type": "application/json",
                         Authorization: `Bearer ${token}`
                     }
                 }
-                const { data } = await clienteAxios.post('/emprendimiento', Emprendimiento, config)
+                const { data } = await clienteAxios.get('/emprendimiento', config)
                 setProyectos(data)
-    
-                
             } catch (error) {
                 console.log(error)
             }
-
         }
         obtenerEmprendimientos()
-    })
+    }, [])
 
     const mostrarAlerta = alerta => {
         setAlerta(alerta)
 
-    setTimeout(() =>{
-        setAlerta({})
-    }, 5000)
+        setTimeout(() => {
+            setAlerta({})
+        }, 5000)
     }
 
-    const submitProyecto = async Emprendimiento =>{
-       /* if (proyecto.id) {
-            await editarProyecto(proyecto)
-        }else {
-            await NuevoProyecto(proyecto)
-        }
-        return*/
+    const submitProyecto = async Emprendimiento => {
+        /* if (proyecto.id) {
+             await editarProyecto(proyecto)
+         }else {
+             await NuevoProyecto(proyecto)
+         }
+         return*/
         try {
             const token = localStorage.getItem('token')
-            if(!token)return
+            if (!token) return
 
             const config = {
-                headers:{
+                headers: {
                     "content-type": "application/json",
                     Authorization: `Bearer ${token}`
                 }
@@ -69,34 +64,28 @@ const ProyectosProvider = ({children}) => {
                 error: false
             })
 
-            setTimeout(() =>{
+            setTimeout(() => {
                 setAlerta({})
-                    navigate('/proyectos')
+                navigate('/proyectos')
 
             }, 3000)
         } catch (error) {
             console.log(error)
         }
-
-
     }
 
-    const editarEmprendimiento = async Emprendimiento =>{
+    // const editarEmprendimiento = async Emprendimiento => {
 
-    }
+    // }
 
-    return(
+    return (
         <ProyectosContext.Provider
             value={{
                 proyectos,
                 mostrarAlerta,
                 alerta,
                 submitProyecto
-                
             }}
-        
-        
-
         >{children}
         </ProyectosContext.Provider>
     )
