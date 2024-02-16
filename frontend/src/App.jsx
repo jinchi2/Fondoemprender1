@@ -7,7 +7,11 @@ import Registrar from './paginas/Registrar'
 import OlvidePassword from './paginas/OlvidePassword'
 import NuevoPassword from './paginas/NuevoPassword'
 import ConfimarCuenta from './paginas/ConfimarCuenta'
+
 import Proyectos from './paginas/Proyectos'
+//import Emprendimientos from './paginas/Emprendimientos'
+
+
 import NuevoProyecto from './paginas/NuevoProyecto'
 import Emprendimiento from './paginas/Emprendimiento'
 
