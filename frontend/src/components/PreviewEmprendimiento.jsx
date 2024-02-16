@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 
-const PreviewEmprendimiento = ({ proyecto }) => {
-  const { titulo, _id} = proyecto
+const PreviewEmprendimiento = ({ emprendimiento }) => {
+  const { titulo, _id} = emprendimiento
   return (
     <div className='border-b p-5 flex'>
         <p>

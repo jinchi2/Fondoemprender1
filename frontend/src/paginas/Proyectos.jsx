@@ -3,18 +3,18 @@ import PreviewEmprendimiento from "../components/PreviewEmprendimiento"
 
 const Proyectos = () => {
 
-  const { proyectos } = useProyectos()
-  console.log(proyectos)
+  const { emprendimientos } = useProyectos()
+  console.log(emprendimientos)
   return (
     <>
       <h1 className='text-4xl font-black'>Emprendimientos</h1>
 
       <div className='bg-white shadow mt-10 rounded-lg-5'>
-        {proyectos.length ?
-          proyectos.map(proyecto => (
+        {emprendimientos.length ?
+          emprendimientos.map(emprendimiento => (
             <PreviewEmprendimiento
-              key={proyecto._id}
-              proyecto={proyecto}
+              key={emprendimiento._id}
+              emprendimiento={emprendimientos}
             />
           ))
           : <p className='text-center text-red-600 uppercase p-5'>no hay emprendimientos</p>}
