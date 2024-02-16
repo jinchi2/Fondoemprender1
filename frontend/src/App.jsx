@@ -38,7 +38,6 @@ function App() {
                 <Route index element={<Proyectos />}/>
                 <Route path='crear-proyecto' element={<NuevoProyecto />}/>
                 <Route path=':id' element={<Emprendimiento />}/>
-
             </Route>
           </Routes>
         </ProyectosProvider>

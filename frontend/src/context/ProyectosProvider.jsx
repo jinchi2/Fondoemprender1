@@ -9,6 +9,9 @@ const ProyectosProvider = ({ children }) => {
 
     const [emprendimientos, setEmprendimientos] = useState([])
     const [alerta, setAlerta] = useState([])
+
+    const [emprendimiento, setEmprendimiento] = useState({})
+
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -60,6 +63,8 @@ const ProyectosProvider = ({ children }) => {
             const { data } = await clienteAxios.post('/emprendimiento', Emprendimiento, config)
             console.log(data)
 
+            setEmprendimientos([...emprendimientos, data])
+
             setAlerta({
                 msg: 'emprendimiento creado correctamente',
                 error: false
@@ -68,6 +73,7 @@ const ProyectosProvider = ({ children }) => {
             setTimeout(() => {
                 setAlerta({})
                 navigate('/proyectos')
+                window.location.reload();
 
             }, 3000)
         } catch (error) {
@@ -78,6 +84,23 @@ const ProyectosProvider = ({ children }) => {
     // const editarEmprendimiento = async Emprendimiento => {
 
     // }
+    const obtenerEmprendimiento = async id =>{
+        try {
+            const token = localStorage.getItem('token')
+            if (!token) return
+
+            const config = {
+                headers: {
+                    "content-type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            }
+            const { data } = await clienteAxios(`/emprendimiento/${id}`, config)
+            setEmprendimiento(data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     return (
         <ProyectosContext.Provider
@@ -85,7 +108,8 @@ const ProyectosProvider = ({ children }) => {
                 emprendimientos,
                 mostrarAlerta,
                 alerta,
-                submitProyecto
+                submitProyecto,
+                obtenerEmprendimiento
             }}
         >{children}
         </ProyectosContext.Provider>

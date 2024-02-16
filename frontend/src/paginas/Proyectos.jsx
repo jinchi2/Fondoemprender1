@@ -4,7 +4,7 @@ import PreviewEmprendimiento from "../components/PreviewEmprendimiento"
 const Proyectos = () => {
 
   const { emprendimientos } = useProyectos()
-  console.log(emprendimientos)
+  
   return (
     <>
       <h1 className='text-4xl font-black'>Emprendimientos</h1>
@@ -14,7 +14,7 @@ const Proyectos = () => {
           emprendimientos.map(emprendimiento => (
             <PreviewEmprendimiento
               key={emprendimiento._id}
-              emprendimiento={emprendimientos}
+              emprendimiento={emprendimiento}
             />
           ))
           : <p className='text-center text-red-600 uppercase p-5'>no hay emprendimientos</p>}
