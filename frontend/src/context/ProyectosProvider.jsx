@@ -2,11 +2,12 @@ import { useState, useEffect, createContext } from "react";
 import clienteAxios from "../config/clienteAxios";
 import { useNavigate } from 'react-router-dom';
 
+
 const ProyectosContext = createContext()
 
 const ProyectosProvider = ({ children }) => {
 
-    const [proyectos, setProyectos] = useState([])
+    const [emprendimientos, setEmprendimientos] = useState([])
     const [alerta, setAlerta] = useState([])
     const navigate = useNavigate()
 
@@ -23,7 +24,7 @@ const ProyectosProvider = ({ children }) => {
                     }
                 }
                 const { data } = await clienteAxios.get('/emprendimiento', config)
-                setProyectos(data)
+                setEmprendimientos(data)
             } catch (error) {
                 console.log(error)
             }
@@ -81,7 +82,7 @@ const ProyectosProvider = ({ children }) => {
     return (
         <ProyectosContext.Provider
             value={{
-                proyectos,
+                emprendimientos,
                 mostrarAlerta,
                 alerta,
                 submitProyecto
@@ -91,7 +92,7 @@ const ProyectosProvider = ({ children }) => {
     )
 }
 export {
-    ProyectosProvider
+    ProyectosProvider 
 }
 
 export default ProyectosContext
