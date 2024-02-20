@@ -22,11 +22,14 @@ const EditarEmprendimiento = () => {
 
         <div className='mt-10 flex justify-center'>
               <FomularioProyectos />
+              
         </div>
 
        
     </>
+    
   )
+  
 }
 
 export default EditarEmprendimiento

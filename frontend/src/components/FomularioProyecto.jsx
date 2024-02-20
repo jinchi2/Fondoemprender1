@@ -17,19 +17,22 @@ const FomularioProyectos = () => {
     const [presupuestos, setPresupuestos] = useState('')
 
     const params = useParams()
-    const { mostrarAlerta, alerta, submitProyecto, } = useProyectos()
+    const { mostrarAlerta, alerta, submitProyecto, emprendimiento } = useProyectos()
 
     useEffect(() => {
-        if (params.id) {
-            setId(Emprendimiento._id)
-            setTitulo(Emprendimiento.titulo)
-            setTelefono(Emprendimiento.telefono)
-            setDescripcion(Emprendimiento.descripcion)
-            setDireccion(Emprendimiento.direccion)
-            setImagen(Emprendimiento.imagen)
-            setBeneficiario(Emprendimiento.beneficiario)
-            setPresupuestos(Emprendimiento.presupuestos)
+        if(params.id){
+        setId(emprendimiento.id)
+        setTitulo(emprendimiento.titulo)
+        setTelefono(emprendimiento.telefono)
+        setDescripcion(emprendimiento.descripcion)
+        setDireccion(emprendimiento.direccion)
+        setImagen(emprendimiento.imagen)
+        setBeneficiario(emprendimiento.beneficiario)
+        setPresupuestos(emprendimiento.presupuestos)
         }
+
+
+
     }, [params])
 
 
@@ -186,9 +189,9 @@ const FomularioProyectos = () => {
 
             <input
                 type='submit'
-                value='Enviar Información'
+                value={id ? 'Actualizar Emprendimiento' : 'Enviar Información'}
                 className='bg-green-600 w-full p-3 uppercase font-bold text-white
-            rounded cursos-pointer hover:bg-green-700 transition-colors'
+                rounded cursos-pointer hover:bg-green-700 transition-colors'
 
             />
 
