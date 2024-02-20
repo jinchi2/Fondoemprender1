@@ -5,6 +5,7 @@ import cors from "cors"
 import morgan from "morgan";
 import usuarioRoutes from './routes/usuarioRoutes.js'
 import emprendimientoRoutes from './routes/emprendimientoRoutes.js'
+import fileUpload from 'express-fileupload'
 
 const app = express();
 app.use(express.json())
@@ -13,21 +14,11 @@ app.use(morgan("dev"))
 dotenv.config();
 conectarDB();
 
-// Configurar CORS
-const whitelist = [process.env.FRONTEND_URL]
+app.use(fileUpload({
+    useTempFiles: true,
+    tempFileDir: './upload'
+}))
 
-const corsOptions = {
-    origin: function (origin, callback) {
-        if (whitelist.includes(origin)) {
-            // Puede consultar la API
-            callback(null, true)
-        } else {
-            // No esta permitido el req
-            callback(new Error("Error de Cors"))
-        }
-    }
-}
-app.use(cors(corsOptions))
 
 
 //Routing 路由

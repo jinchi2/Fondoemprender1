@@ -21,7 +21,7 @@ const FomularioProyectos = () => {
 
     useEffect(() => {
         if(params.id){
-        setId(emprendimiento.id)
+        setId(emprendimiento._id)
         setTitulo(emprendimiento.titulo)
         setTelefono(emprendimiento.telefono)
         setDescripcion(emprendimiento.descripcion)
@@ -189,11 +189,13 @@ const FomularioProyectos = () => {
 
             <input
                 type='submit'
-                value={id ? 'Actualizar Emprendimiento' : 'Enviar Información'}
+                value={id ? 'Actualizar Emprendimiento' : 'Enviar informacion'}
                 className='bg-green-600 w-full p-3 uppercase font-bold text-white
                 rounded cursos-pointer hover:bg-green-700 transition-colors'
 
             />
+
+
 
 
 

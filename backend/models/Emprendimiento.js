@@ -22,9 +22,8 @@ const empredimientosSchema = mongoose.Schema({
         required: true
     },
     imagen: {
-        type: String,
-        trim: true,
-        required: true
+        url: String,
+        public_id: String
     },
     beneficiario: {
         type: String,
