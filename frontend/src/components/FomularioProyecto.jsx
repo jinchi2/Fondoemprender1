@@ -3,6 +3,7 @@ import useProyectos from "../hooks/useProyectos"
 import Alerta from "./Alerta"
 import { useParams } from "react-router-dom"
 import clienteAxios from "../config/clienteAxios"
+import Emprendimiento from "../paginas/Emprendimiento"
 
 const FomularioProyectos = () => {
 
@@ -20,14 +21,14 @@ const FomularioProyectos = () => {
 
     useEffect(() => {
         if (params.id) {
-            setId(proyecto._id)
-            setTitulo(proyecto.titulo)
-            setTelefono(proyecto.telefono)
-            setDescripcion(proyecto.descripcion)
-            setDireccion(proyecto.direccion)
-            setImagen(proyecto.imagen)
-            setBeneficiario(proyecto.beneficiario)
-            setPresupuestos(proyecto.presupuestos)
+            setId(Emprendimiento._id)
+            setTitulo(Emprendimiento.titulo)
+            setTelefono(Emprendimiento.telefono)
+            setDescripcion(Emprendimiento.descripcion)
+            setDireccion(Emprendimiento.direccion)
+            setImagen(Emprendimiento.imagen)
+            setBeneficiario(Emprendimiento.beneficiario)
+            setPresupuestos(Emprendimiento.presupuestos)
         }
     }, [params])
 

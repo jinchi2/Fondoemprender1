@@ -9,8 +9,8 @@ const ProyectosProvider = ({ children }) => {
 
     const [emprendimientos, setEmprendimientos] = useState([])
     const [alerta, setAlerta] = useState([])
-
     const [emprendimiento, setEmprendimiento] = useState({})
+    const [cargando, setCargando] = useState(false)
 
     const navigate = useNavigate()
 
@@ -99,6 +99,8 @@ const ProyectosProvider = ({ children }) => {
             setEmprendimiento(data)
         } catch (error) {
             console.log(error)
+        }finally{
+            setCargando(false)
         }
     }
 
@@ -109,7 +111,9 @@ const ProyectosProvider = ({ children }) => {
                 mostrarAlerta,
                 alerta,
                 submitProyecto,
-                obtenerEmprendimiento
+                obtenerEmprendimiento,
+                emprendimiento,
+                cargando
             }}
         >{children}
         </ProyectosContext.Provider>

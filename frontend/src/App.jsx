@@ -14,9 +14,11 @@ import Proyectos from './paginas/Proyectos'
 
 import NuevoProyecto from './paginas/NuevoProyecto'
 import Emprendimiento from './paginas/Emprendimiento'
+import EditarEmprendimiento from './paginas/EditarEmprendimiento'
 
 import { AuthProvider } from './context/AuthProvider'
 import { ProyectosProvider } from './context/ProyectosProvider'
+
 
 
 
@@ -38,6 +40,8 @@ function App() {
                 <Route index element={<Proyectos />}/>
                 <Route path='crear-proyecto' element={<NuevoProyecto />}/>
                 <Route path=':id' element={<Emprendimiento />}/>
+                <Route path='editar/:id' element={<EditarEmprendimiento/>}/>
+
             </Route>
           </Routes>
         </ProyectosProvider>
