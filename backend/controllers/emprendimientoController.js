@@ -1,5 +1,6 @@
 import Emprendimiento from "../models/Emprendimiento.js"
 import { uploadImage } from "../libs/cloudinary.js";
+import fs from 'fs-extra'
 
 const obtenerEmprendimientos = async (req, res) => {
     try {
@@ -12,15 +13,26 @@ const obtenerEmprendimientos = async (req, res) => {
 };
 
 const nuevoEmprendimiento = async (req, res) => {
-    const emprendimiento = new Emprendimiento(req.body)
-    emprendimiento.creador = req.usuario._id
-     if (req.files.image) {
-        const result = await uploadImage(req.files.image.tempFilePath)
-        console.log(result);
+    //const emprendimiento = new Emprendimiento(req.body)
+    let imagen;
+     if (req.files?.imagen) {
+        const result = await uploadImage(req.files.imagen.tempFilePath)
+        await fs.remove(req.files.imagen.tempFilePath)
+        imagen = {
+            url: result.secure_url,
+            public_id: result.public_id
+        }
      }
+     const emprendimiento = new Emprendimiento({
+        ...req.body,
+        imagen,
+     })
+     
+    emprendimiento.creador = req.usuario._id
     try {
         const emprendimientoAlmacenado = await emprendimiento.save()
         res.json(emprendimientoAlmacenado)
+        console.log(emprendimientoAlmacenado)
     } catch (error) {
         console.log(error)
     }

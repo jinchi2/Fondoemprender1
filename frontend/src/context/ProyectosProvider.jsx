@@ -43,7 +43,7 @@ const ProyectosProvider = ({ children }) => {
         }, 5000)
     }
 
-    const submitProyecto = async Emprendimiento => {
+    const submitProyecto = async emprendimiento => {
         /* if (proyecto.id) {
              await editarProyecto(proyecto)
          }else {
@@ -53,16 +53,21 @@ const ProyectosProvider = ({ children }) => {
         try {
             const token = localStorage.getItem('token')
             if (!token) return
-
+            const form = new FormData
+            for (let key in emprendimiento){
+                form.append(key, emprendimiento[key])
+            }
             const config = {
                 headers: {
-                    "content-type": "application/json",
+                    "Content-type": "multipart/form-data",
                     Authorization: `Bearer ${token}`
                 }
             }
-            const { data } = await clienteAxios.post('/emprendimiento', Emprendimiento, config)
-            console.log(data)
-
+            const { data } = await clienteAxios.post('/emprendimiento', emprendimiento, config, {
+                headers: {
+                    "Content-type": "multipart/form-data"
+                }
+            })
             setEmprendimientos([...emprendimientos, data])
 
             setAlerta({
@@ -73,6 +78,7 @@ const ProyectosProvider = ({ children }) => {
             setTimeout(() => {
                 setAlerta({})
                 navigate('/proyectos')
+                //recargar
                 window.location.reload();
 
             }, 3000)

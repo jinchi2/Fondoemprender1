@@ -2,8 +2,6 @@ import { useState, useEffect } from "react"
 import useProyectos from "../hooks/useProyectos"
 import Alerta from "./Alerta"
 import { useParams } from "react-router-dom"
-import clienteAxios from "../config/clienteAxios"
-import Emprendimiento from "../paginas/Emprendimiento"
 
 const FomularioProyectos = () => {
 
@@ -12,13 +10,18 @@ const FomularioProyectos = () => {
     const [telefono, setTelefono] = useState('')
     const [descripcion, setDescripcion] = useState('')
     const [direccion, setDireccion] = useState('')
-    const [imagen, setImagen] = useState('')
+    const [imagen, setImagen] = useState(null)
     const [beneficiario, setBeneficiario] = useState('')
     const [presupuestos, setPresupuestos] = useState('')
 
     const params = useParams()
-    const { mostrarAlerta, alerta, submitProyecto, emprendimiento } = useProyectos()
 
+    const subirImagen = (e) => {
+        const nuevaImagen = e.target.files[0];
+        setImagen(nuevaImagen)
+    }
+
+    const { mostrarAlerta, alerta, submitProyecto, emprendimiento } = useProyectos()
     useEffect(() => {
         if(params.id){
         setId(emprendimiento._id)
@@ -30,9 +33,6 @@ const FomularioProyectos = () => {
         setBeneficiario(emprendimiento.beneficiario)
         setPresupuestos(emprendimiento.presupuestos)
         }
-
-
-
     }, [params])
 
 
@@ -64,7 +64,7 @@ const FomularioProyectos = () => {
         setTelefono('')
         setDescripcion('')
         setDireccion('')
-        setImagen('')
+        setImagen(null)
         setBeneficiario('')
         setPresupuestos('')
     }
@@ -73,6 +73,7 @@ const FomularioProyectos = () => {
 
     return (
         <form
+            encType="multipart/form-data"
             className='bg-white py-10 px-5 md:w-1/2 rounded-lg shadow'
             onSubmit={handleSumbit}
         >
@@ -148,11 +149,11 @@ const FomularioProyectos = () => {
                 >Imagen</label>
 
                 <input
-                    id="descripcion"
+                    id="imagen"
+                    type="file"
                     className='border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md'
                     placeholder="Imagen"
-                    value={imagen}
-                    onChange={e => setImagen(e.target.value)}
+                    onChange={subirImagen}
                 />
             </div>
 

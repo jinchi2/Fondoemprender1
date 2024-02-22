@@ -16,8 +16,25 @@ conectarDB();
 
 app.use(fileUpload({
     useTempFiles: true,
-    tempFileDir: './upload'
+    tempFileDir: './imagen'
 }))
+
+
+//cors
+const whitelist = [process.env.FRONTEND_URL]
+
+const corsOptions ={
+    origin: function(origin, callback){
+        if (whitelist.includes(origin)) {
+            //permitido
+            callback(null, true)
+        } else {
+            //no permitido
+            callback(new Error("Error de cors"))
+        }
+    }
+}
+app.use(cors(corsOptions))
 
 
 
