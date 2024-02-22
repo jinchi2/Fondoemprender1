@@ -43,13 +43,53 @@ const ProyectosProvider = ({ children }) => {
         }, 5000)
     }
 
-    const submitProyecto = async emprendimiento => {
-        /* if (proyecto.id) {
-             await editarProyecto(proyecto)
+    const submitEmprendimiento = async emprendimiento => {
+        
+        if (emprendimiento.id) {
+             await editarEmprendimiento(emprendimiento)
          }else {
-             await NuevoProyecto(proyecto)
+             await nuevoEmprendimiento(emprendimiento)
          }
-         return*/
+         return
+        
+    }
+
+    const editarEmprendimiento = async emprendimiento => {
+        try {
+            const token = localStorage.getItem('token')
+            if (!token) return
+            const form = new FormData
+            for (let key in emprendimiento){
+                form.append(key, emprendimiento[key])
+            }
+            const config = {
+                headers: {
+                    "Content-type": "multipart/form-data",
+                    Authorization: `Bearer ${token}`
+                }
+            }
+            const { data } = await clienteAxios.put(`/emprendimiento/${emprendimiento.id}`,emprendimiento, config)
+            
+            //Sincronizar el state
+            const emprendimientoActualizados = emprendimientos.map(emprendimientoState => emprendimientoState._id === data._id ? data : emprendimientoState)
+            console.log(emprendimientoActualizados)
+            //Mostrar la alerta emprendimiento actualizado
+
+            //Redireccionar
+
+
+            setTimeout(() => {
+                setAlerta({})
+                navigate('/proyectos')
+                //recargar
+                window.location.reload();
+            }, 3000)
+        } catch (error) {
+            console.log(error)
+        }
+     }
+
+     const nuevoEmprendimiento = async emprendimiento => {
         try {
             const token = localStorage.getItem('token')
             if (!token) return
@@ -85,11 +125,9 @@ const ProyectosProvider = ({ children }) => {
         } catch (error) {
             console.log(error)
         }
-    }
+     }
 
-    // const editarEmprendimiento = async Emprendimiento => {
 
-    // }
     const obtenerEmprendimiento = async id =>{
         try {
             const token = localStorage.getItem('token')
@@ -116,7 +154,7 @@ const ProyectosProvider = ({ children }) => {
                 emprendimientos,
                 mostrarAlerta,
                 alerta,
-                submitProyecto,
+                submitEmprendimiento,
                 obtenerEmprendimiento,
                 emprendimiento,
                 cargando

@@ -21,7 +21,7 @@ const FomularioProyectos = () => {
         setImagen(nuevaImagen)
     }
 
-    const { mostrarAlerta, alerta, submitProyecto, emprendimiento } = useProyectos()
+    const { mostrarAlerta, alerta, submitEmprendimiento, emprendimiento } = useProyectos()
     useEffect(() => {
         if(params.id){
         setId(emprendimiento._id)
@@ -48,7 +48,7 @@ const FomularioProyectos = () => {
         }
 
         // pasar los datos hacia el provider
-        await submitProyecto({
+        await submitEmprendimiento({
             id,
             titulo,
             telefono,
