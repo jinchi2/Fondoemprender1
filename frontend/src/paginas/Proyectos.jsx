@@ -4,10 +4,12 @@ import PreviewEmprendimiento from "../components/PreviewEmprendimiento"
 const Proyectos = () => {
 
   const { emprendimientos } = useProyectos()
+  console.log(emprendimientos)
   
   return (
     <>
       <h1 className='text-4xl font-black'>Emprendimientos</h1>
+
 
       <div className='bg-white shadow mt-10 rounded-lg-5'>
         {emprendimientos.length ?

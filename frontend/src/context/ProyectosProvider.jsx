@@ -72,10 +72,21 @@ const ProyectosProvider = ({ children }) => {
             
             //Sincronizar el state
             const emprendimientoActualizados = emprendimientos.map(emprendimientoState => emprendimientoState._id === data._id ? data : emprendimientoState)
-            console.log(emprendimientoActualizados)
-            //Mostrar la alerta emprendimiento actualizado
+            setEmprendimientos(emprendimientoActualizados)
 
-            //Redireccionar
+            //Mostrar la alerta emprendimiento actualizado
+            setAlerta({
+                msg: 'Emprendimiento Actualizado correctamente',
+                error: false
+            })
+
+            setTimeout(() => {
+                setAlerta({})
+                navigate('/proyectos')
+                //recargar
+                //window.location.reload();
+
+            }, 3000)
 
 
             setTimeout(() => {
@@ -103,11 +114,12 @@ const ProyectosProvider = ({ children }) => {
                     Authorization: `Bearer ${token}`
                 }
             }
-            const { data } = await clienteAxios.post('/emprendimiento', emprendimiento, config, {
+            const { data } = await clienteAxios.post('/emprendimiento', emprendimiento, config/* {
                 headers: {
                     "Content-type": "multipart/form-data"
                 }
-            })
+            }*/)
+
             setEmprendimientos([...emprendimientos, data])
 
             setAlerta({
@@ -119,9 +131,10 @@ const ProyectosProvider = ({ children }) => {
                 setAlerta({})
                 navigate('/proyectos')
                 //recargar
-                window.location.reload();
+                /*window.location.reload();*/
 
             }, 3000)
+
         } catch (error) {
             console.log(error)
         }
@@ -148,6 +161,54 @@ const ProyectosProvider = ({ children }) => {
         }
     }
 
+    const eliminarEmprendimiento = async id => {
+        try {
+            const token = localStorage.getItem('token')
+            if (!token) return
+            const form = new FormData
+            for (let key in emprendimiento){
+                form.append(key, emprendimiento[key])
+            }
+            const config = {
+                headers: {
+                    "Content-type": "multipart/form-data",
+                    Authorization: `Bearer ${token}`
+                }
+            }
+            try {
+                const { data } = await clienteAxios.delete(`/emprendimiento/${id}`, config/*{
+                    headers: {
+                        "Content-type": "multipart/form-data"
+                    }
+                }*/)
+
+                // Sincronizar el state
+                const emprendimientoActualizados = emprendimientos.filter(emprendimientoState => emprendimientoState._id !== id)
+                setEmprendimientos(emprendimientoActualizados)
+
+                setAlerta({
+                    msg: data.msg,
+                    error: false
+                })
+
+                setTimeout(() => {
+                    setAlerta({})
+                    navigate('/proyectos')
+                    //recargar
+                    /*window.location.reload();*/
+    
+                }, 3000)
+    
+            } catch (error) {
+                console.log(error)
+            }
+            
+            
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <ProyectosContext.Provider
             value={{
@@ -157,7 +218,8 @@ const ProyectosProvider = ({ children }) => {
                 submitEmprendimiento,
                 obtenerEmprendimiento,
                 emprendimiento,
-                cargando
+                cargando,
+                eliminarEmprendimiento
             }}
         >{children}
         </ProyectosContext.Provider>
