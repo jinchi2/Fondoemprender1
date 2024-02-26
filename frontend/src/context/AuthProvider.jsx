@@ -40,13 +40,23 @@ const AuthProvider = ({children}) => {
         autenticarUsuario()
     }, [])
 
+   /* const CerrarSesion = async () => {
+        try {
+            localStorage.removeItem('token')
+            window.location.href = '/';
+        } catch (error) {
+            console.log('Error al cerrar sesión:' + error)
+        }
+    };*/
+
     
     return(
         <AuthContext.Provider
             value={{
                 auth,
                 setAuth,
-                cargando
+                cargando,
+                //CerrarSesion
             }}
         >
             {children}

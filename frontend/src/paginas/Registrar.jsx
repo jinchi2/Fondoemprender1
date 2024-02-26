@@ -180,7 +180,7 @@ const Registrar = () => {
       <nav className='lg:flex lg:justify-between'>
         <Link
           className='block text-center my-5 text-slate-500 uppercase text-sm'
-          to='/'
+          to='/login'
         >¿Ya tienes cuenta? Inicia sesion </Link>
 
         <Link

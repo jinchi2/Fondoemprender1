@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom"
+//import { CerrarSesion } from "../context/AuthProvider"
 
 const Header = () => {
+
+   const handleCerrarSesion = () => {
+        CerrarSesion()
+   } 
   return (
     <header className='px-4 py-5 bg-white border-b'>
         <div className='md:flex md:justify-between'>
@@ -15,13 +20,14 @@ const Header = () => {
             <div className='flex items-center gap-4'>
                 <Link
                     to='/proyectos'
-                    className='font-bold uppercase'
-                    >Empredimiendo
+                    className='font-bold uppercase'>
+                    Empredimiendo
                 </Link>
 
                 <button
                     type='button'
                     className='text-white text-sm bg-green-600 p-3 rounded-md uppercase font.bold'
+                    onClick={handleCerrarSesion}
                 >Cerrar Sesion</button>
 
             </div>

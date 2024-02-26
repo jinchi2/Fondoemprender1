@@ -18,6 +18,7 @@ import EditarEmprendimiento from './paginas/EditarEmprendimiento'
 
 import { AuthProvider } from './context/AuthProvider'
 import { ProyectosProvider } from './context/ProyectosProvider'
+import Inicio from './paginas/Inicio'
 
 
 
@@ -30,7 +31,10 @@ function App() {
         <ProyectosProvider>
           <Routes>
             <Route path='/' element={<AuthLayout />}>
-              <Route index element={<Login />} />
+             <Route index element={<Inicio />} />
+            </Route >
+            <Route path='/' element={<AuthLayout />}>
+              <Route path='login' element={<Login />} />
               <Route path='registrar' element={<Registrar />} />
               <Route path='olvidepassword' element={<OlvidePassword />} />
               <Route path='olvidepassword/:token' element={<NuevoPassword />} />
