@@ -34,6 +34,13 @@ const ProyectosProvider = ({ children }) => {
         }
         obtenerEmprendimientos()
     }, [])
+    useEffect(() => {
+        const obtenerEmprendimientosInicio = async () => {
+                const { data } = await clienteAxios.get('')
+                setEmprendimientos(data)
+        }
+        obtenerEmprendimientosInicio()
+    }, [])
 
     const mostrarAlerta = alerta => {
         setAlerta(alerta)

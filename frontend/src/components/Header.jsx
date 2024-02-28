@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom"
-//import { CerrarSesion } from "../context/AuthProvider"
+import useAuth from "../hooks/useAuth"
 
 const Header = () => {
-
+    const { CerrarSesion } = useAuth();
    const handleCerrarSesion = () => {
         CerrarSesion()
    } 

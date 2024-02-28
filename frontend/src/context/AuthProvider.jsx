@@ -40,14 +40,14 @@ const AuthProvider = ({children}) => {
         autenticarUsuario()
     }, [])
 
-   /* const CerrarSesion = async () => {
+    const CerrarSesion = async () => {
         try {
             localStorage.removeItem('token')
             window.location.href = '/';
         } catch (error) {
             console.log('Error al cerrar sesión:' + error)
         }
-    };*/
+    };
 
     
     return(
@@ -56,7 +56,7 @@ const AuthProvider = ({children}) => {
                 auth,
                 setAuth,
                 cargando,
-                //CerrarSesion
+                CerrarSesion
             }}
         >
             {children}
