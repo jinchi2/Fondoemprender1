@@ -14,6 +14,8 @@ const router = express.Router()
 
 /*router.get('/', checkAuth, obtenerEmprendimientos)
 router.post('/', checkAuth, nuevoEmprendimiento)*/
+router.route('')
+    .get(obtenerEmprendimientos)
 
 router.route('/')
     .get(checkAuth, obtenerEmprendimientos)

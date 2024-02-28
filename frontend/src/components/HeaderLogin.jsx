@@ -8,14 +8,18 @@ const HeaderLogin = () => {
                 Fondo emprender
             </h2>
             <div className='flex items-center gap-4'>
+            <a
+                    className='text-white text-sm bg-green-600 p-3 rounded-md uppercase font.bold'
+                    href="/"
+                >Inicio</a>
 
                 <a
                     className='text-white text-sm bg-green-600 p-3 rounded-md uppercase font.bold'
                     href="/login"
                 >Iniciar Sesion</a>
 
+                
             </div>
-
         </div>
     </header>
   )
