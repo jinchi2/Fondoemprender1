@@ -1,4 +1,5 @@
 
+
 const Veremprendimiento = ({ emprendimiento }) => {
   const { titulo, descripcion, imagen } = emprendimiento
 

@@ -222,6 +222,7 @@ const EmprendimientosProvider = ({ children }) => {
                 obtenerEmprendimiento,
                 obtenerEmprendimientos,
                 emprendimiento,
+                emprendimientos,
                 cargando,
                 eliminarEmprendimiento
             }}
