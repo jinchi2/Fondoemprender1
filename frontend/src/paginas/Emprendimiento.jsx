@@ -1,11 +1,11 @@
 import { useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import useProyectos from '../hooks/useProyectos'
+import useEmprendimientos from '../hooks/useEmprendimientos'
 
 const Emprendimiento = () => {
     const params = useParams()
     
-    const { obtenerEmprendimiento, emprendimiento, cargando } = useProyectos()
+    const { obtenerEmprendimiento, emprendimiento, cargando } = useEmprendimientos()
 
     useEffect(() => {
       obtenerEmprendimiento(params.id)
@@ -22,7 +22,7 @@ const Emprendimiento = () => {
             </svg>
 
             <Link
-              to={`/proyectos/editar/${params.id}`}
+              to={`/emprendimientos/editar/${params.id}`}
               className="uppercase font-bold"
             >Editar</Link>
 

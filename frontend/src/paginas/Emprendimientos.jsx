@@ -1,9 +1,9 @@
-import useProyectos from "../hooks/useProyectos"
+import useEmprendimientos from "../hooks/useEmprendimientos"
 import PreviewEmprendimiento from "../components/PreviewEmprendimiento"
 
-const Proyectos = () => {
+const Emprendimientos = () => {
 
-  const { emprendimientos } = useProyectos()
+  const { emprendimientos } = useEmprendimientos()
   console.log(emprendimientos)
   
   return (
@@ -25,4 +25,4 @@ const Proyectos = () => {
   )
 }
 
-export default Proyectos
+export default Emprendimientos

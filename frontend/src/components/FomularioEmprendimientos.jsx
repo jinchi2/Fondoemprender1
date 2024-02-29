@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react"
-import useProyectos from "../hooks/useProyectos"
+import useEmprendimientos from "../hooks/useEmprendimientos"
 import Alerta from "./Alerta"
 import { useParams } from "react-router-dom"
 
-const FomularioProyectos = () => {
+const FomularioEmprendimientos = () => {
 
     const [id, setId] = useState(null)
     const [titulo, setTitulo] = useState('')
@@ -21,17 +21,17 @@ const FomularioProyectos = () => {
         setImagen(nuevaImagen)
     }
 
-    const { mostrarAlerta, alerta, submitEmprendimiento, emprendimiento } = useProyectos()
+    const { mostrarAlerta, alerta, submitEmprendimiento, emprendimiento } = useEmprendimientos()
     useEffect(() => {
-        if(params.id){
-        setId(emprendimiento._id)
-        setTitulo(emprendimiento.titulo)
-        setTelefono(emprendimiento.telefono)
-        setDescripcion(emprendimiento.descripcion)
-        setDireccion(emprendimiento.direccion)
-        setImagen(emprendimiento.imagen)
-        setBeneficiario(emprendimiento.beneficiario)
-        setPresupuestos(emprendimiento.presupuestos)
+        if (params.id) {
+            setId(emprendimiento._id)
+            setTitulo(emprendimiento.titulo)
+            setTelefono(emprendimiento.telefono)
+            setDescripcion(emprendimiento.descripcion)
+            setDireccion(emprendimiento.direccion)
+            setImagen(emprendimiento.imagen)
+            setBeneficiario(emprendimiento.beneficiario)
+            setPresupuestos(emprendimiento.presupuestos)
         }
     }, [params])
 
@@ -155,6 +155,19 @@ const FomularioProyectos = () => {
                     placeholder="Imagen"
                     onChange={subirImagen}
                 />
+                {params.id && (
+                    <>
+                        <input
+                            id="imagen"
+                            type="text"
+                            className='border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md'
+                            placeholder="Imagen"
+                            value={imagen ? imagen.url.split("/").slice(-1) : ""}
+                            disabled
+                        />
+                        <img src={imagen.url} width="20%"/>
+                    </>
+                )}
             </div>
 
             <div className='mb-5'>
@@ -204,4 +217,4 @@ const FomularioProyectos = () => {
     )
 }
 
-export default FomularioProyectos
+export default FomularioEmprendimientos

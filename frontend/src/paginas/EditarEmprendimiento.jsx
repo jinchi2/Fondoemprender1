@@ -1,26 +1,25 @@
 import { useEffect } from "react"
 import { useParams } from "react-router-dom"
-import FomularioProyectos from "../components/FomularioProyecto"
-import useProyectos from "../hooks/useProyectos"
+import FomularioEmprendimientos from "../components/FomularioEmprendimientos"
+import useEmprendimientos from "../hooks/useEmprendimientos"
 
 const EditarEmprendimiento = () => {
     const params = useParams()
     
-    const { obtenerEmprendimiento, emprendimiento, cargando, eliminarEmprendimiento } = useProyectos()
+    const { obtenerEmprendimiento, emprendimiento, cargando, eliminarEmprendimiento } = useEmprendimientos()
 
     useEffect(() => {
       obtenerEmprendimiento(params.id)
     }, [])
 
     const handleClick = () => {
-        if (confirm('¿Deseas eliminar este proyecto')) {
+        if (confirm('¿Deseas eliminar este emprendimiento?')) {
             eliminarEmprendimiento(params.id)
         }
     }
     const { titulo } = emprendimiento
 
-    if (cargando) return 'cargando......'
-    
+    if (cargando) return 'cargando......'    
 
   return (
     <>
@@ -42,7 +41,7 @@ const EditarEmprendimiento = () => {
         </div>
 
         <div className='mt-10 flex justify-center'>
-              <FomularioProyectos />
+              <FomularioEmprendimientos />
               
         </div>
 

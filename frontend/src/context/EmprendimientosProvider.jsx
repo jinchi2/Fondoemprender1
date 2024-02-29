@@ -3,9 +3,9 @@ import clienteAxios from "../config/clienteAxios";
 import { useNavigate } from 'react-router-dom';
 
 
-const ProyectosContext = createContext()
+const EmprendimientosContext = createContext()
 
-const ProyectosProvider = ({ children }) => {
+const EmprendimientosProvider = ({ children }) => {
 
     const [emprendimientos, setEmprendimientos] = useState([])
     const [alerta, setAlerta] = useState([])
@@ -33,13 +33,6 @@ const ProyectosProvider = ({ children }) => {
             }
         }
         obtenerEmprendimientos()
-    }, [])
-    useEffect(() => {
-        const obtenerEmprendimientosInicio = async () => {
-                const { data } = await clienteAxios.get('')
-                setEmprendimientos(data)
-        }
-        obtenerEmprendimientosInicio()
     }, [])
 
     const mostrarAlerta = alerta => {
@@ -89,7 +82,7 @@ const ProyectosProvider = ({ children }) => {
 
             setTimeout(() => {
                 setAlerta({})
-                navigate('/proyectos')
+                navigate('/Emprendimientos')
                 //recargar
                 //window.location.reload();
 
@@ -98,7 +91,7 @@ const ProyectosProvider = ({ children }) => {
 
             setTimeout(() => {
                 setAlerta({})
-                navigate('/proyectos')
+                navigate('/Emprendimientos')
                 //recargar
                 window.location.reload();
             }, 3000)
@@ -136,7 +129,7 @@ const ProyectosProvider = ({ children }) => {
 
             setTimeout(() => {
                 setAlerta({})
-                navigate('/proyectos')
+                navigate('/Emprendimientos')
                 //recargar
                 /*window.location.reload();*/
 
@@ -200,7 +193,7 @@ const ProyectosProvider = ({ children }) => {
 
                 setTimeout(() => {
                     setAlerta({})
-                    navigate('/proyectos')
+                    navigate('/Emprendimientos')
                     //recargar
                     /*window.location.reload();*/
     
@@ -217,7 +210,7 @@ const ProyectosProvider = ({ children }) => {
     }
 
     return (
-        <ProyectosContext.Provider
+        <EmprendimientosContext.Provider
             value={{
                 emprendimientos,
                 mostrarAlerta,
@@ -229,11 +222,11 @@ const ProyectosProvider = ({ children }) => {
                 eliminarEmprendimiento
             }}
         >{children}
-        </ProyectosContext.Provider>
+        </EmprendimientosContext.Provider>
     )
 }
 export {
-    ProyectosProvider 
+    EmprendimientosProvider 
 }
 
-export default ProyectosContext
+export default EmprendimientosContext

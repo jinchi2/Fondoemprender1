@@ -4,7 +4,7 @@ import fs from 'fs-extra'
 
 const obtenerEmprendimientos = async (req, res) => {
     try {
-        const emprendimientos = await Emprendimiento.find({creador: req.usuario._id});
+        const emprendimientos = await Emprendimiento.find({ creador: req.usuario._id });
         res.json(emprendimientos);
     } catch (error) {
         console.log(error);
@@ -15,19 +15,19 @@ const obtenerEmprendimientos = async (req, res) => {
 const nuevoEmprendimiento = async (req, res) => {
     //const emprendimiento = new Emprendimiento(req.body)
     let imagen;
-     if (req.files?.imagen) {
+    if (req.files?.imagen) {
         const result = await uploadImage(req.files.imagen.tempFilePath)
         await fs.remove(req.files.imagen.tempFilePath)
         imagen = {
             url: result.secure_url,
             public_id: result.public_id
         }
-     }
-     const emprendimiento = new Emprendimiento({
+    }
+    const emprendimiento = new Emprendimiento({
         ...req.body,
         imagen,
-     })
-     
+    })
+
     emprendimiento.creador = req.usuario._id
     try {
         const emprendimientoAlmacenado = await emprendimiento.save()
