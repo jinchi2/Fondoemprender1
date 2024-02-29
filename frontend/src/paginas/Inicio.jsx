@@ -1,34 +1,29 @@
-import useProyectos from "../hooks/useProyectos"
-import Veremprendimiento from "./Veremprendimiento"
+import useEmprendimientos from "../hooks/useEmprendimientos"
+import Veremprendimiento from "../components/Veremprendimiento"
 //pagina prinsipar
 
 const Inicio = () => {
 
-    const { emprendimientos } = useProyectos()
-    console.log(emprendimientos)
-
+  const { emprendimientos } = useEmprendimientos()
+  console.log(emprendimientos)
 
   return (
     <>
-        <h1 className='text-4xl font-black'>Bienvenidos</h1>
-    
-        <div className='bg-white shadow mt-10 rounded-lg-5 '>
-        {emprendimientos.length ?
+      <h1 className='text-4xl font-black'>Bienvenidos</h1>
+
+      <div className='bg-white shadow mt-10 rounded-lg'>
+        {emprendimientos.length ? 
           emprendimientos.map(emprendimiento => (
             <Veremprendimiento
-              key={emprendimiento._id}
+              key={emprendimientos._id}
               emprendimiento={emprendimiento}
             />
+
           ))
-          : <p className='text-center text-red-600 uppercase p-5'>no hay emprendimientos</p>}
+        : <p className='mt-5 text-center text-gray-600 uppercase'>No puedes ver</p>}
       </div>
-      
 
     </>
-            
-          
-
-    
   )
 }
 

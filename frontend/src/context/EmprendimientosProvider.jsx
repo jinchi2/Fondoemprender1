@@ -3,35 +3,40 @@ import clienteAxios from "../config/clienteAxios";
 import { useNavigate } from 'react-router-dom';
 
 
-const ProyectosContext = createContext()
+const EmprendimientosContext = createContext()
 
-const ProyectosProvider = ({ children }) => {
+const EmprendimientosProvider = ({ children }) => {
 
     const [emprendimientos, setEmprendimientos] = useState([])
     const [alerta, setAlerta] = useState([])
     const [emprendimiento, setEmprendimiento] = useState({})
-    const [cargando, setCargando] = useState(false)
+    const [cargando, setCargando] = useState(true)
 
     const navigate = useNavigate()
 
-    useEffect(() => {
-        const obtenerEmprendimientos = async () => {
-            try {
-                const token = localStorage.getItem('token')
-                if (!token) return
-
-                const config = {
-                    headers: {
-                        "content-type": "application/json",
-                        Authorization: `Bearer ${token}`
-                    }
-                }
-                const { data } = await clienteAxios.get('/emprendimiento', config)
-                setEmprendimientos(data)
-            } catch (error) {
-                console.log(error)
+    const obtenerEmprendimientos = async () => {
+        try {
+            const token = localStorage.getItem('token')
+            if (!token) {
+                setCargando(false)
+                return;
             }
+
+            const config = {
+                headers: {
+                    "content-type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            }
+            const { data } = await clienteAxios.get('/emprendimiento', config)
+            setEmprendimientos(data)
+            setCargando(false)
+            return data
+        } catch (error) {
+            console.log(error)
+            setCargando(false)
         }
+<<<<<<< HEAD:frontend/src/context/ProyectosProvider.jsx
         obtenerEmprendimientos()
     }, [])
     useEffect(() => {
@@ -41,6 +46,9 @@ const ProyectosProvider = ({ children }) => {
         }
         obtenerEmprendimientosInicio()
     }, [])
+=======
+    }
+>>>>>>> 16e192ff8024ed8c99aa580064c34c17a0f7457a:frontend/src/context/EmprendimientosProvider.jsx
 
     const mostrarAlerta = alerta => {
         setAlerta(alerta)
@@ -51,14 +59,14 @@ const ProyectosProvider = ({ children }) => {
     }
 
     const submitEmprendimiento = async emprendimiento => {
-        
+
         if (emprendimiento.id) {
-             await editarEmprendimiento(emprendimiento)
-         }else {
-             await nuevoEmprendimiento(emprendimiento)
-         }
-         return
-        
+            await editarEmprendimiento(emprendimiento)
+        } else {
+            await nuevoEmprendimiento(emprendimiento)
+        }
+        return
+
     }
 
     const editarEmprendimiento = async emprendimiento => {
@@ -66,7 +74,7 @@ const ProyectosProvider = ({ children }) => {
             const token = localStorage.getItem('token')
             if (!token) return
             const form = new FormData
-            for (let key in emprendimiento){
+            for (let key in emprendimiento) {
                 form.append(key, emprendimiento[key])
             }
             const config = {
@@ -75,8 +83,8 @@ const ProyectosProvider = ({ children }) => {
                     Authorization: `Bearer ${token}`
                 }
             }
-            const { data } = await clienteAxios.put(`/emprendimiento/${emprendimiento.id}`,emprendimiento, config)
-            
+            const { data } = await clienteAxios.put(`/emprendimiento/${emprendimiento.id}`, emprendimiento, config)
+
             //Sincronizar el state
             const emprendimientoActualizados = emprendimientos.map(emprendimientoState => emprendimientoState._id === data._id ? data : emprendimientoState)
             setEmprendimientos(emprendimientoActualizados)
@@ -89,7 +97,7 @@ const ProyectosProvider = ({ children }) => {
 
             setTimeout(() => {
                 setAlerta({})
-                navigate('/proyectos')
+                navigate('/Emprendimientos')
                 //recargar
                 //window.location.reload();
 
@@ -98,21 +106,21 @@ const ProyectosProvider = ({ children }) => {
 
             setTimeout(() => {
                 setAlerta({})
-                navigate('/proyectos')
+                navigate('/Emprendimientos')
                 //recargar
                 window.location.reload();
             }, 3000)
         } catch (error) {
             console.log(error)
         }
-     }
+    }
 
-     const nuevoEmprendimiento = async emprendimiento => {
+    const nuevoEmprendimiento = async emprendimiento => {
         try {
             const token = localStorage.getItem('token')
             if (!token) return
             const form = new FormData
-            for (let key in emprendimiento){
+            for (let key in emprendimiento) {
                 form.append(key, emprendimiento[key])
             }
             const config = {
@@ -136,7 +144,7 @@ const ProyectosProvider = ({ children }) => {
 
             setTimeout(() => {
                 setAlerta({})
-                navigate('/proyectos')
+                navigate('/Emprendimientos')
                 //recargar
                 /*window.location.reload();*/
 
@@ -145,10 +153,10 @@ const ProyectosProvider = ({ children }) => {
         } catch (error) {
             console.log(error)
         }
-     }
+    }
 
 
-    const obtenerEmprendimiento = async id =>{
+    const obtenerEmprendimiento = async id => {
         try {
             const token = localStorage.getItem('token')
             if (!token) return
@@ -163,7 +171,7 @@ const ProyectosProvider = ({ children }) => {
             setEmprendimiento(data)
         } catch (error) {
             console.log(error)
-        }finally{
+        } finally {
             setCargando(false)
         }
     }
@@ -173,7 +181,7 @@ const ProyectosProvider = ({ children }) => {
             const token = localStorage.getItem('token')
             if (!token) return
             const form = new FormData
-            for (let key in emprendimiento){
+            for (let key in emprendimiento) {
                 form.append(key, emprendimiento[key])
             }
             const config = {
@@ -200,40 +208,42 @@ const ProyectosProvider = ({ children }) => {
 
                 setTimeout(() => {
                     setAlerta({})
-                    navigate('/proyectos')
+                    navigate('/Emprendimientos')
                     //recargar
                     /*window.location.reload();*/
-    
+
                 }, 3000)
-    
+
             } catch (error) {
                 console.log(error)
             }
-            
-            
+
+
         } catch (error) {
             console.log(error)
         }
     }
 
     return (
-        <ProyectosContext.Provider
+        <EmprendimientosContext.Provider
             value={{
                 emprendimientos,
                 mostrarAlerta,
                 alerta,
                 submitEmprendimiento,
                 obtenerEmprendimiento,
+                obtenerEmprendimientos,
                 emprendimiento,
+                emprendimientos,
                 cargando,
                 eliminarEmprendimiento
             }}
         >{children}
-        </ProyectosContext.Provider>
+        </EmprendimientosContext.Provider>
     )
 }
 export {
-    ProyectosProvider 
+    EmprendimientosProvider
 }
 
-export default ProyectosContext
+export default EmprendimientosContext

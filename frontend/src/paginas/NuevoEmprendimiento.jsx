@@ -1,12 +1,12 @@
-import FomularioProyectos from "../components/FomularioProyecto"
+import FomularioEmprendimientos from "../components/FomularioEmprendimientos"
 
-const NuevoProyecto = () => {
+const NuevoEmprendimiento = () => {
     return (
       <>
           <h1 className='text-4xl font-black'>Crear Emprendimiento</h1>
   
           <div className='mt-10 flex justify-center'>
-              <FomularioProyectos />
+              <FomularioEmprendimientos />
 
               
           </div>
@@ -14,5 +14,5 @@ const NuevoProyecto = () => {
     )
   }
   
-  export default NuevoProyecto
+  export default NuevoEmprendimiento
   

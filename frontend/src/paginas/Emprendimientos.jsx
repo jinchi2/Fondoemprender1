@@ -1,11 +1,21 @@
-import useProyectos from "../hooks/useProyectos"
+import React, { useEffect, useState } from 'react';
+import useEmprendimientos from "../hooks/useEmprendimientos"
 import PreviewEmprendimiento from "../components/PreviewEmprendimiento"
 
-const Proyectos = () => {
+const Emprendimientos = () => {
 
-  const { emprendimientos } = useProyectos()
-  console.log(emprendimientos)
-  
+  const { obtenerEmprendimientos, cargando } = useEmprendimientos()
+  const [emprendimientos, setEmprendimientos] = useState([])
+
+  useEffect(() => {
+    const emprendimientos = async () => {
+      setEmprendimientos(await obtenerEmprendimientos())
+    }
+    emprendimientos();
+  }, [])
+
+  if (cargando) return <h1>Cargando...</h1>
+
   return (
     <>
       <h1 className='text-4xl font-black'>Emprendimientos</h1>
@@ -25,4 +35,4 @@ const Proyectos = () => {
   )
 }
 
-export default Proyectos
+export default Emprendimientos

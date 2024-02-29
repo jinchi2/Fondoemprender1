@@ -10,7 +10,7 @@ const Header = () => {
     <header className='px-4 py-5 bg-white border-b'>
         <div className='md:flex md:justify-between'>
             <h2 className='text-4xl text-green-600 font-black-center'>
-                Fondo emprende
+                Fondo emprender
             </h2>
         
             <input
@@ -19,9 +19,9 @@ const Header = () => {
                 className='rounded-lg lg:w-96 block p-2 boder' />
             <div className='flex items-center gap-4'>
                 <Link
-                    to='/proyectos'
+                    to='/emprendimientos'
                     className='font-bold uppercase'>
-                    Empredimiendo
+                    Empredimiento
                 </Link>
 
                 <button
