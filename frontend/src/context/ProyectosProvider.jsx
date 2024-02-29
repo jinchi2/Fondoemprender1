@@ -36,8 +36,8 @@ const ProyectosProvider = ({ children }) => {
     }, [])
     useEffect(() => {
         const obtenerEmprendimientosInicio = async () => {
-                const { data } = await clienteAxios.get('')
-                setEmprendimientos(data)
+            const { data } = await clienteAxios.get('')
+            setEmprendimientos(data)
         }
         obtenerEmprendimientosInicio()
     }, [])
