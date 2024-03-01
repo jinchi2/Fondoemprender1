@@ -4,7 +4,7 @@ import fs from 'fs-extra'
 
 const obtenerEmprendimientos = async (req, res) => {
     try {
-        const emprendimientos = await Emprendimiento.find({ creador: req.usuario._id });
+        const emprendimientos = await Emprendimiento.find();
         res.json(emprendimientos);
     } catch (error) {
         console.log(error);

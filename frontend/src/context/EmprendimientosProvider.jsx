@@ -14,22 +14,36 @@ const EmprendimientosProvider = ({ children }) => {
 
     const navigate = useNavigate()
 
-    const obtenerEmprendimientos = async () => {
-        try {
-            const token = localStorage.getItem('token')
-            if (!token) {
-                setCargando(false)
-                return;
+    useEffect(() => {
+        const Veremprendimiento = async () => {
+            try {
+                const token = localStorage.getItem('token')
+            if (!token) return
+            const form = new FormData
+            for (let key in emprendimiento) {
+                form.append(key, emprendimiento[key])
             }
-
             const config = {
                 headers: {
-                    "content-type": "application/json",
+                    "Content-type": "multipart/form-data",
                     Authorization: `Bearer ${token}`
                 }
             }
-            const { data } = await clienteAxios.get('/emprendimiento', config)
+            const {data} = await clienteAxios('/emprendimiento', config)
             setEmprendimientos(data)
+            //console.log(data)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        Veremprendimiento()
+    })
+
+    const obtenerEmprendimientos = async () => {
+        try {
+            const { data } = await clienteAxios.get('')
+            setEmprendimientos(data)
+            console.log(data)
             setCargando(false)
             return data
         } catch (error) {
@@ -117,7 +131,7 @@ const EmprendimientosProvider = ({ children }) => {
                     Authorization: `Bearer ${token}`
                 }
             }
-            const { data } = await clienteAxios.post('/emprendimiento', emprendimiento, config/* {
+            const { data } = await clienteAxios.post('/emprendimientos', emprendimiento, config/* {
                 headers: {
                     "Content-type": "multipart/form-data"
                 }
@@ -155,7 +169,7 @@ const EmprendimientosProvider = ({ children }) => {
                     Authorization: `Bearer ${token}`
                 }
             }
-            const { data } = await clienteAxios(`/emprendimiento/${id}`, config)
+            const { data } = await clienteAxios(`/emprendimientos/${id}`, config)
             setEmprendimiento(data)
         } catch (error) {
             console.log(error)
@@ -179,7 +193,7 @@ const EmprendimientosProvider = ({ children }) => {
                 }
             }
             try {
-                const { data } = await clienteAxios.delete(`/emprendimiento/${id}`, config/*{
+                const { data } = await clienteAxios.delete(`/emprendimientos/${id}`, config/*{
                     headers: {
                         "Content-type": "multipart/form-data"
                     }
@@ -222,7 +236,7 @@ const EmprendimientosProvider = ({ children }) => {
                 obtenerEmprendimiento,
                 obtenerEmprendimientos,
                 emprendimiento,
-                emprendimientos,
+                
                 cargando,
                 eliminarEmprendimiento
             }}

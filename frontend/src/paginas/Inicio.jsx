@@ -5,7 +5,7 @@ import Veremprendimiento from "../components/Veremprendimiento"
 const Inicio = () => {
 
   const { emprendimientos } = useEmprendimientos()
-  console.log(emprendimientos)
+  //console.log(emprendimientos)
 
   return (
     <>

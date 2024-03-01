@@ -11,7 +11,8 @@ const Emprendimiento = () => {
       obtenerEmprendimiento(params.id)
     }, [])
     const { titulo } = emprendimiento
-    if(cargando) return 'Cargando......'
+    if(cargando) return 'Cargando....'
+    
   return (
     
         <div className='flex justify-between'>
