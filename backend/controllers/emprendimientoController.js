@@ -2,6 +2,16 @@ import Emprendimiento from "../models/Emprendimiento.js"
 import { uploadImage } from "../libs/cloudinary.js";
 import fs from 'fs-extra'
 
+const inicioEmprendimientos = async (req, res) => {
+    try {
+        const emprendimientos = await Emprendimiento.find({}).limit(10)
+        res.json(emprendimientos)
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ msg: 'Error al obtener emprendimientos' });
+    }
+}
+
 const obtenerEmprendimientos = async (req, res) => {
     try {
         const emprendimientos = await Emprendimiento.find({ creador: req.usuario._id });
@@ -110,5 +120,5 @@ export {
     editarEmprendimiento,
     eliminarEmprendimiento,
     obtenerProductos,
-
+    inicioEmprendimientos
 }

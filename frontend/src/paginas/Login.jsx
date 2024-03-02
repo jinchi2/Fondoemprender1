@@ -1,4 +1,4 @@
-import {  useState } from "react"
+import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import Alerta from "../components/Alerta"
 import clienteAxios from "../config/clienteAxios"
@@ -9,16 +9,16 @@ const Login = () => {
     const [password, setPassword] = useState('')
     const [alerta, setAlerta] = useState({})
 
-    const { setAuth } = useAuth()
-    const navigate = useNavigate()
+    const { setAuth, auth, cargando } = useAuth()
+    const navigate = useNavigate()    
 
     const handleSubmit = async e => {
         e.preventDefault()
 
-        if ([usuario,password].includes('')) {
+        if ([usuario, password].includes('')) {
             setAlerta({
-              msg: 'Todos los campos son obligatorios',
-              error: true
+                msg: 'Todos los campos son obligatorios',
+                error: true
             })
             return
         }
@@ -37,73 +37,75 @@ const Login = () => {
         }
     }
 
-        const { msg } = alerta
+    const { msg } = alerta
 
-  return (
-    <>
-      <h1 className="text-green-600 font-black text-6xl">Inicia Sesion {' '}
-       </h1>
-           {msg && <Alerta alerta={alerta} />}
-       
-       <form 
-           className="my-10 bg-white shadow rounded-lg p-10"
-           onSubmit={handleSubmit}
-       >
-            <div className="my-5">
-                <label
-                className='uppercase text-gray-600 block text-xl font-bold'
-                htmlFor="usuario"
-                >Usuario</label>
+    if (cargando) return <h1>Cargando...</h1>
+
+    return (
+        <>
+            <h1 className="text-green-600 font-black text-6xl">Inicia Sesion {' '}
+            </h1>
+            {msg && <Alerta alerta={alerta} />}
+
+            <form
+                className="my-10 bg-white shadow rounded-lg p-10"
+                onSubmit={handleSubmit}
+            >
+                <div className="my-5">
+                    <label
+                        className='uppercase text-gray-600 block text-xl font-bold'
+                        htmlFor="usuario"
+                    >Usuario</label>
+                    <input
+                        id="usuario"
+                        type="usuario"
+                        placeholder="Eescribe tu usuario"
+                        className='w-full mt-3 p-3 border rounded-xl bg-gray-50'
+                        value={usuario}
+                        onChange={e => setUsuario(e.target.value)}
+                    />
+                </div>
+
+                <div className="my-5">
+                    <label
+                        className='uppercase text-gray-600 block text-xl font-bold'
+                        htmlFor="password"
+                    >Password</label>
+                    <input
+                        id="password"
+                        type="password"
+                        placeholder="Escriber tu password"
+                        className='w-full mt-3 p-3 border rounded-xl bg-gray-50'
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
+                    />
+                </div>
+
                 <input
-                    id="usuario"
-                    type="usuario"
-                    placeholder="Eescribe tu usuario"
-                    className='w-full mt-3 p-3 border rounded-xl bg-gray-50'
-                    value={usuario}
-                    onChange={ e => setUsuario(e.target.value)}
-                  /> 
-           </div>
-
-           <div className="my-5">
-            <label
-             className='uppercase text-gray-600 block text-xl font-bold'
-             htmlFor="password"
-             >Password</label>
-           <input
-               id="password"
-               type="password"
-               placeholder="Escriber tu password"
-               className='w-full mt-3 p-3 border rounded-xl bg-gray-50'
-               value={password}
-               onChange={ e => setPassword(e.target.value)}
-            /> 
-           </div>
-
-           <input 
-           type="submit"
-           value="Inicia Sesion"
-           className='bg-green-700 mb-5 w-full py-3 text-white uppercase font-bold rounded
+                    type="submit"
+                    value="Inicia Sesion"
+                    className='bg-green-700 mb-5 w-full py-3 text-white uppercase font-bold rounded
            hover:cursor-pointer hover:bg-green-800 transition-color'
-           />
-       </form>
+                />
+            </form>
 
-       <nav className='lg:flex lg:justify-between'>
-           <Link
-               className='block text-center my-5 text-slate-500 uppercase text-sm'
-               to='/registrar'
-           >¿No tienes una cuneta? Registrate </Link>
+            <nav className='lg:flex lg:justify-between'>
+                <Link
+                    className='block text-center my-5 text-slate-500 uppercase text-sm'
+                    to='/registrar'
+                >¿No tienes una cuneta? Registrate </Link>
 
-          <Link
-               className='block text-center my-5 text-slate-500 uppercase text-sm'
-               to='/olvidepassword'
-           >¿Olvide mi Password </Link>
-       </nav>
+                <Link
+                    className='block text-center my-5 text-slate-500 uppercase text-sm'
+                    to='/olvidepassword'
+                >¿Olvide mi Password </Link>
+            </nav>
 
-       
-    </>
-      
-    
-  )
+
+        </>
+
+
+    )
 }
 
 export default Login

@@ -14,17 +14,57 @@ const EmprendimientosProvider = ({ children }) => {
 
     const navigate = useNavigate()
 
+    useEffect(() => {
+        const Veremprendimiento = async () => {
+            try {
+                const token = localStorage.getItem('token')
+                if (!token) {
+                    setCargando(false)
+                    return
+                }
+                const form = new FormData
+                for (let key in emprendimiento) {
+                    form.append(key, emprendimiento[key])
+                }
+                const config = {
+                    headers: {
+                        "Content-type": "multipart/form-data",
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+                const { data } = await clienteAxios('/emprendimiento', config)
+                setEmprendimientos(data)
+                //console.log(data)
+            } catch (error) {
+                console.log(error)
+            }
+            setCargando(false)
+        }
+        Veremprendimiento()
+    }, [])
+
+    const emprendimientosInicio = async () => {
+        try {
+            const { data } = await clienteAxios.get('/emprendimiento/inicio')
+            setCargando(false)
+            return data
+        } catch (error) {
+            console.log(error)
+            setCargando(false)
+        }
+    }
+
     const obtenerEmprendimientos = async () => {
         try {
             const token = localStorage.getItem('token')
             if (!token) {
                 setCargando(false)
-                return;
+                return
             }
 
             const config = {
                 headers: {
-                    "content-type": "application/json",
+                    "Content-type": "multipart/form-data",
                     Authorization: `Bearer ${token}`
                 }
             }
@@ -32,6 +72,7 @@ const EmprendimientosProvider = ({ children }) => {
             setEmprendimientos(data)
             setCargando(false)
             return data
+            
         } catch (error) {
             console.log(error)
             setCargando(false)
@@ -117,7 +158,7 @@ const EmprendimientosProvider = ({ children }) => {
                     Authorization: `Bearer ${token}`
                 }
             }
-            const { data } = await clienteAxios.post('/emprendimiento', emprendimiento, config/* {
+            const { data } = await clienteAxios.post('/emprendimientos', emprendimiento, config/* {
                 headers: {
                     "Content-type": "multipart/form-data"
                 }
@@ -179,7 +220,7 @@ const EmprendimientosProvider = ({ children }) => {
                 }
             }
             try {
-                const { data } = await clienteAxios.delete(`/emprendimiento/${id}`, config/*{
+                const { data } = await clienteAxios.delete(`/emprendimientos/${id}`, config/*{
                     headers: {
                         "Content-type": "multipart/form-data"
                     }
@@ -223,7 +264,8 @@ const EmprendimientosProvider = ({ children }) => {
                 obtenerEmprendimientos,
                 emprendimiento,
                 cargando,
-                eliminarEmprendimiento
+                eliminarEmprendimiento,
+                emprendimientosInicio
             }}
         >{children}
         </EmprendimientosContext.Provider>

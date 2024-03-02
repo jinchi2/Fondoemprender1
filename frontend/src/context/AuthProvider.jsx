@@ -5,7 +5,7 @@ import clienteAxios from "../config/clienteAxios";
 const AuthContext = createContext()
 
 const AuthProvider = ({children}) => {
-    const [ auth, setAuth ] = useState({})
+    const [ auth, setAuth ] = useState(false)
     const [ cargando, setCargando ] = useState(true)
 
     const navigate = useNavigate()
@@ -30,7 +30,7 @@ const AuthProvider = ({children}) => {
                 setAuth(data)
                 
             } catch (error) {
-                setAuth({})
+                setAuth(false)
             }
                 setCargando(false)
             

@@ -7,6 +7,7 @@ import {
     editarEmprendimiento,
     eliminarEmprendimiento,
     obtenerProductos,
+    inicioEmprendimientos
 } from '../controllers/emprendimientoController.js'
 import checkAuth from '../middleware/checkAuth.js'
 
@@ -18,6 +19,8 @@ router.post('/', checkAuth, nuevoEmprendimiento)*/
 router.route('/')
     .get(checkAuth, obtenerEmprendimientos)
     .post(checkAuth, nuevoEmprendimiento)
+
+router.get('/inicio', inicioEmprendimientos)
 
 router.route('/:id')
     .get(checkAuth, obtenerEmprendimiento)

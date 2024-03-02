@@ -13,12 +13,18 @@ const FomularioEmprendimientos = () => {
     const [imagen, setImagen] = useState(null)
     const [beneficiario, setBeneficiario] = useState('')
     const [presupuestos, setPresupuestos] = useState('')
+    const [imagever, setImagever] = useState(null)
 
     const params = useParams()
 
     const subirImagen = (e) => {
-        const nuevaImagen = e.target.files[0];
+        const nuevaImagen = e.target.files[0]
+         // Actualizar el estado de la imagen para enviar al servidor
         setImagen(nuevaImagen)
+        // Crear una URL de objeto para la previsualización
+        const nuevaImagenPreview = URL.createObjectURL(nuevaImagen)
+        setImagever(nuevaImagenPreview)
+
     }
 
     const { mostrarAlerta, alerta, submitEmprendimiento, emprendimiento } = useEmprendimientos()
@@ -32,6 +38,9 @@ const FomularioEmprendimientos = () => {
             setImagen(emprendimiento.imagen)
             setBeneficiario(emprendimiento.beneficiario)
             setPresupuestos(emprendimiento.presupuestos)
+            if (emprendimiento.imagen) {
+                setImagever(emprendimiento.imagen.url);
+            }
         }
     }, [params])
 
@@ -148,6 +157,15 @@ const FomularioEmprendimientos = () => {
                     htmlFor='imagen'
                 >Imagen</label>
 
+                <div>
+                    {imagever && (
+                        <img
+                            src={imagever}
+                        />
+                    )}
+
+                </div>
+
                 <input
                     id="imagen"
                     type="file"
@@ -155,19 +173,7 @@ const FomularioEmprendimientos = () => {
                     placeholder="Imagen"
                     onChange={subirImagen}
                 />
-                {params.id && (
-                    <>
-                        <input
-                            id="imagen"
-                            type="text"
-                            className='border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md'
-                            placeholder="Imagen"
-                            value={imagen ? imagen.url.split("/").slice(-1) : ""}
-                            disabled
-                        />
-                        <img src={imagen.url} width="20%"/>
-                    </>
-                )}
+                
             </div>
 
             <div className='mb-5'>

@@ -4,14 +4,17 @@ import PreviewEmprendimiento from "../components/PreviewEmprendimiento"
 
 const Emprendimientos = () => {
 
-  const { obtenerEmprendimientos, cargando } = useEmprendimientos()
+  const { obtenerEmprendimientos } = useEmprendimientos()
+  const [cargando, setCargando] = useState(true)
   const [emprendimientos, setEmprendimientos] = useState([])
 
   useEffect(() => {
-    const emprendimientos = async () => {
-      setEmprendimientos(await obtenerEmprendimientos())
+    const getEmprendimientos = async () => {
+      const res = await obtenerEmprendimientos()
+      setEmprendimientos(res)
+      setCargando(false)
     }
-    emprendimientos();
+    getEmprendimientos()
   }, [])
 
   if (cargando) return <h1>Cargando...</h1>
