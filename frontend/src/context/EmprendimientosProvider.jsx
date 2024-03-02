@@ -36,19 +36,7 @@ const EmprendimientosProvider = ({ children }) => {
             console.log(error)
             setCargando(false)
         }
-<<<<<<< HEAD:frontend/src/context/ProyectosProvider.jsx
-        obtenerEmprendimientos()
-    }, [])
-    useEffect(() => {
-        const obtenerEmprendimientosInicio = async () => {
-            const { data } = await clienteAxios.get('')
-            setEmprendimientos(data)
-        }
-        obtenerEmprendimientosInicio()
-    }, [])
-=======
     }
->>>>>>> 16e192ff8024ed8c99aa580064c34c17a0f7457a:frontend/src/context/EmprendimientosProvider.jsx
 
     const mostrarAlerta = alerta => {
         setAlerta(alerta)
@@ -234,7 +222,6 @@ const EmprendimientosProvider = ({ children }) => {
                 obtenerEmprendimiento,
                 obtenerEmprendimientos,
                 emprendimiento,
-                emprendimientos,
                 cargando,
                 eliminarEmprendimiento
             }}
