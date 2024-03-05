@@ -21,7 +21,6 @@ app.use(fileUpload({
 
 
 //cors
-
 const whitelist = [process.env.FRONTEND_URL]
 
 const corsOptions ={

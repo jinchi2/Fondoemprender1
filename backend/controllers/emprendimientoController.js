@@ -1,5 +1,5 @@
 import Emprendimiento from "../models/Emprendimiento.js"
-import { uploadImage } from "../libs/cloudinary.js";
+import { deleteImg, uploadImage } from "../libs/cloudinary.js";
 import fs from 'fs-extra'
 
 const inicioEmprendimientos = async (req, res) => {
@@ -74,6 +74,20 @@ const editarEmprendimiento = async (req, res) => {
     if (console.log(emprendimiento.creador.toString() === req.usuario._id.toString())) {
         const error = new Error("Accion no Valida")
         return res.status(401).json({ msg: error.message })
+    }
+    //Actualizar imagen 
+    if (req.files?.img) {
+        const result = await uploadImage(req.files.img.tempFilePath)
+        //eliminar la imagen anterior
+        if (emprendimiento.img && emprendimiento.img.public_id) {
+            await deleteImg(emprendimiento.img.public_id);
+        }
+        emprendimiento.img = {
+            url: result.secure_url,
+            public_id: result.public_id
+        }
+        //eliminar el archivo temporal de la imagen
+        await fs.remove(req.files.img.tempFilePath);
     }
     emprendimiento.titulo = req.body.titulo || emprendimiento.titulo
     emprendimiento.telefono = req.body.telefono || emprendimiento.telefono
