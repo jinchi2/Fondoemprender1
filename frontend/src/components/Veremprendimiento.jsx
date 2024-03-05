@@ -1,22 +1,24 @@
-
+import { Link } from "react-router-dom"
 
 const Veremprendimiento = ({ emprendimiento }) => {
   const { titulo, descripcion, imagen  } = emprendimiento
 
   return (
-      <div className="rounded overflow-hidden shadow-lg">
-        <div className="px-6 py-4">
-          <div className="font-bold text-xl mb-2">
-            {emprendimiento.imagen && <img src={imagen.url}/> }</div>
-          
-            <h1 className="font-bold text-xl mb-2">{titulo}</h1>
-            <p className="text-gray-700 text-base">
-              {descripcion}
-              
-            </p>
-            
+    <div className="bg-gray-200 shadow rounded-lg p-10 justify-center mt-10 mr-10">
+          <div className="ml-10">
+            {emprendimiento.imagen && <img src={imagen.url} style={{ width: '85%', height: 'auto' }}/> }
           </div>
-      </div>
+          
+          <div className="ml-10 mt-10">
+                <h1 className="uppercase font-black text-2xl text-center">{titulo}</h1>
+                <p className="mt-7 mb-7">
+                    <span className="text-sm">{''}{descripcion}</span>
+                </p>
+                <h2 className="text-center">
+                    
+                </h2>
+            </div>
+          </div>
   )
 }
 

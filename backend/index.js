@@ -36,8 +36,6 @@ const corsOptions ={
 }
 app.use(cors(corsOptions))
 
-
-
 //Routing 路由
 app.use('/api/usuarios', usuarioRoutes)
 app.use('/api/emprendimiento', emprendimientoRoutes)

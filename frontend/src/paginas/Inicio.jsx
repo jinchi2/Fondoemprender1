@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import useEmprendimientos from "../hooks/useEmprendimientos"
 import Veremprendimiento from "../components/Veremprendimiento"
-//pagina prinsipar
+//pagina principar
 
 const Inicio = () => {
   const { emprendimientosInicio, cargando } = useEmprendimientos()
@@ -23,9 +23,9 @@ const Inicio = () => {
 
   return (
     <>
-      <h1 className='text-4xl font-black'>Bienvenidos</h1>
-
-      <div className='bg-white shadow mt-10 rounded-lg'>
+      <h1 className='text-4xl font-black text-center'>Bienvenidos</h1>
+      <div className='bg-white container mx-auto p-5 md:flex md:justify-center mt-5'>
+      <div className='grid grid-cols-1 ms-auto p-5 md:justify-center md:grid-cols-2'>
         {emprendimientos.length ?
           emprendimientos.map(emprendimiento => (
             <Veremprendimiento
@@ -36,7 +36,7 @@ const Inicio = () => {
           ))
           : <p className='mt-5 text-center text-gray-600 uppercase'>No puedes ver</p>}
       </div>
-
+      </div>
     </>
   )
 }

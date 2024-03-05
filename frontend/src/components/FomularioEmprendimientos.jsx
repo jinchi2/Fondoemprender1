@@ -167,6 +167,7 @@ const FomularioEmprendimientos = () => {
                 </div>
 
                 <input
+                    //para subi imagen
                     id="imagen"
                     type="file"
                     className='border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md'
@@ -207,16 +208,16 @@ const FomularioEmprendimientos = () => {
                 />
             </div>
 
+            
             <input
+                //botom para Actualizar
                 type='submit'
-                value={id ? 'Actualizar Emprendimiento' : 'Enviar informacion'}
+                value={id ? 'Actualizar Emprendimiento' : 'Enviar informacion' }
                 className='bg-green-600 w-full p-3 uppercase font-bold text-white
                 rounded cursos-pointer hover:bg-green-700 transition-colors'
 
             />
-
-
-
+           
 
 
         </form>

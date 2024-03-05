@@ -76,24 +76,23 @@ const editarEmprendimiento = async (req, res) => {
         return res.status(401).json({ msg: error.message })
     }
     //Actualizar imagen 
-    if (req.files?.img) {
-        const result = await uploadImage(req.files.img.tempFilePath)
+    if (req.files?.imagen) {
+        const result = await uploadImage(req.files.imagen.tempFilePath)
         //eliminar la imagen anterior
-        if (emprendimiento.img && emprendimiento.img.public_id) {
-            await deleteImg(emprendimiento.img.public_id);
+        if (emprendimiento.imagen && emprendimiento.imagen.public_id) {
+            await deleteImg(emprendimiento.imagen.public_id);
         }
-        emprendimiento.img = {
+        emprendimiento.imagen = {
             url: result.secure_url,
             public_id: result.public_id
         }
         //eliminar el archivo temporal de la imagen
-        await fs.remove(req.files.img.tempFilePath);
+        await fs.remove(req.files.imagen.tempFilePath);
     }
     emprendimiento.titulo = req.body.titulo || emprendimiento.titulo
     emprendimiento.telefono = req.body.telefono || emprendimiento.telefono
     emprendimiento.direccion = req.body.direccion || emprendimiento.direccion
     emprendimiento.descripcion = req.body.descripcion || emprendimiento.descripcion
-    emprendimiento.imagen = req.body.imagen || emprendimiento.imagen
     emprendimiento.beneficiario = req.body.beneficiario || emprendimiento.beneficiario
     emprendimiento.presupuestos = req.body.presupuestos || emprendimiento.presupuestos
 
