@@ -10,7 +10,7 @@ import ConfimarCuenta from './paginas/ConfimarCuenta'
 
 import Emprendimientos from './paginas/Emprendimientos'
 //import Emprendimientos from './paginas/Emprendimientos'
-
+import InfoEmprendimiento from './paginas/InfoEmprendimiento'
 
 import NuevoEmprendimiento from './paginas/NuevoEmprendimiento'
 import Emprendimiento from './paginas/Emprendimiento'
@@ -32,6 +32,7 @@ function App() {
           <Routes>
             <Route path='/' element={<AuthLayout />}>
               <Route index element={<Inicio />} />
+              <Route path='convocatoria/:id' element={<InfoEmprendimiento/>} />
             </Route >
             <Route path='/' element={<AuthLayout />}>
               <Route path='login' element={<Login />} />
@@ -45,7 +46,6 @@ function App() {
               <Route path='crear-emprendimiento' element={<NuevoEmprendimiento />} />
               <Route path=':id' element={<Emprendimiento />} />
               <Route path='editar/:id' element={<EditarEmprendimiento />} />
-
             </Route>
           </Routes>
         </EmprendimientosProvider>

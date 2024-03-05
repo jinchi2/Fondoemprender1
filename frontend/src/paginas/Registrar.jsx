@@ -61,7 +61,7 @@ const Registrar = () => {
   const { msg } = alerta
 
   return (
-    <>
+    <div>
       <h1 className="text-green-600 font-black text-6xl">Crea tu Cuenta {' '}
       </h1>
 
@@ -189,7 +189,7 @@ const Registrar = () => {
         >¿Olvide mi Password </Link>
       </nav>
 
-    </>
+    </div>
 
   )
 }

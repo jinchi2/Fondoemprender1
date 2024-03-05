@@ -22,7 +22,7 @@ const Inicio = () => {
   if (cargando) return <h1>Cargando...</h1>
 
   return (
-    <>
+    <div>
       <h1 className='text-4xl font-black text-center'>Bienvenidos</h1>
       <div className='bg-white container mx-auto p-5 md:flex md:justify-center mt-5'>
       <div className='grid grid-cols-1 ms-auto p-5 md:justify-center md:grid-cols-2'>
@@ -32,12 +32,12 @@ const Inicio = () => {
               key={emprendimiento._id}
               emprendimiento={emprendimiento}
             />
-
           ))
           : <p className='mt-5 text-center text-gray-600 uppercase'>No puedes ver</p>}
+          
       </div>
       </div>
-    </>
+    </div>
   )
 }
 

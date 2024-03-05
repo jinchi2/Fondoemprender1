@@ -38,7 +38,7 @@ const OlvidePassword = () => {
   const { msg } = alerta
 
   return (
-    <>
+    <div>
     <h1 className="text-green-600 font-black text-6xl">Recupera tu Cuenta {' '}
     </h1>
 
@@ -85,7 +85,7 @@ const OlvidePassword = () => {
         >¿No tienes una cuneta? Registrate </Link>
     </nav>
 
- </>
+ </div>
     
   )
 }

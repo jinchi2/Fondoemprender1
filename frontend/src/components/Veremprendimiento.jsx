@@ -1,24 +1,30 @@
 import { Link } from "react-router-dom"
 
 const Veremprendimiento = ({ emprendimiento }) => {
-  const { titulo, descripcion, imagen  } = emprendimiento
+  const { titulo, descripcion, imagen, _id } = emprendimiento
 
   return (
     <div className="bg-gray-200 shadow rounded-lg p-10 justify-center mt-10 mr-10">
-          <div className="ml-10">
-            {emprendimiento.imagen && <img src={imagen.url} style={{ width: '85%', height: 'auto' }}/> }
-          </div>
-          
-          <div className="ml-10 mt-10">
-                <h1 className="uppercase font-black text-2xl text-center">{titulo}</h1>
-                <p className="mt-7 mb-7">
-                    <span className="text-sm">{''}{descripcion}</span>
-                </p>
-                <h2 className="text-center">
-                    
-                </h2>
-            </div>
-          </div>
+      <div className="ml-10">
+        {emprendimiento.imagen && <img src={imagen.url} style={{ width: '85%', height: 'auto' }} />}
+      </div>
+
+      <div className="ml-10 mt-10">
+        <h1 className="uppercase font-black text-2xl text-center">{titulo}</h1>
+        <p className="mt-7 mb-7">
+          <span className="text-sm">{''}{descripcion}</span>
+        </p>
+        <h2 className="text-center">
+          <Link
+            to={`convocatoria/${_id}`}
+            className='text-gray-600 hover:text-gray-800 uppercase text-sm font-bold'
+
+          >Ver Emprendimiento
+
+          </Link>
+        </h2>
+      </div>
+    </div>
   )
 }
 

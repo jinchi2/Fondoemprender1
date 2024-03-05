@@ -42,7 +42,7 @@ const Login = () => {
     if (cargando) return <h1>Cargando...</h1>
 
     return (
-        <>
+        <div className="md:mt-20 ">
             <h1 className="text-green-600 font-black text-6xl">Inicia Sesion {' '}
             </h1>
             {msg && <Alerta alerta={alerta} />}
@@ -55,7 +55,7 @@ const Login = () => {
                     <label
                         className='uppercase text-gray-600 block text-xl font-bold'
                         htmlFor="usuario"
-                    >Usuario</label>
+                    >Correo</label>
                     <input
                         id="usuario"
                         type="usuario"
@@ -70,7 +70,7 @@ const Login = () => {
                     <label
                         className='uppercase text-gray-600 block text-xl font-bold'
                         htmlFor="password"
-                    >Password</label>
+                    >Contraseña</label>
                     <input
                         id="password"
                         type="password"
@@ -91,7 +91,7 @@ const Login = () => {
 
             <nav className='lg:flex lg:justify-between'>
                 <Link
-                    className='block text-center my-5 text-slate-500 uppercase text-sm'
+                    className='block text-center my-5 text-slate-500 uppercase text-sm mr-10'
                     to='/registrar'
                 >¿No tienes una cuneta? Registrate </Link>
 
@@ -102,7 +102,7 @@ const Login = () => {
             </nav>
 
 
-        </>
+        </div>
 
 
     )
