@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import useEmprendimientos from "../hooks/useEmprendimientos"
 import Veremprendimiento from "../components/Veremprendimiento"
+import InfoEmprendimiento from '../paginas/InfoEmprendimiento';
 //pagina principar
 
 const Inicio = () => {
