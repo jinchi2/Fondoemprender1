@@ -58,7 +58,7 @@ const Login = () => {
                     >Correo</label>
                     <input
                         id="usuario"
-                        type="usuario"
+                        type="email"
                         placeholder="Eescribe tu usuario"
                         className='w-full mt-3 p-3 border rounded-xl bg-gray-50'
                         value={usuario}

@@ -15,7 +15,7 @@ const Veremprendimiento = ({ emprendimiento }) => {
   return (
     <div className="bg-gray-200 shadow rounded-lg p-10 justify-center mt-10 mr-10">
       <div className="ml-10">
-        {imagen && <img src={imagen.url} style={{ width: '85%', height: 'auto' }} alt={titulo} />}
+        {imagen && <img src={imagen.url} style={{ width: '22rem', height: '22rem' }} alt={titulo} />}
       </div>
 
       <div className="ml-10 mt-10">
