@@ -130,7 +130,7 @@ const EmprendimientosProvider = ({ children }) => {
                 //recargar
                 //window.location.reload();
 
-            }, 3000)
+            }, 2000)
 
 
             setTimeout(() => {
@@ -158,7 +158,7 @@ const EmprendimientosProvider = ({ children }) => {
                     Authorization: `Bearer ${token}`
                 }
             }
-            const { data } = await clienteAxios.post('/emprendimientos', emprendimiento, config/* {
+            const { data } = await clienteAxios.post('/emprendimiento', emprendimiento, config/* {
                 headers: {
                     "Content-type": "multipart/form-data"
                 }
@@ -177,7 +177,7 @@ const EmprendimientosProvider = ({ children }) => {
                 //recargar
                 /*window.location.reload();*/
 
-            }, 3000)
+            }, 2000)
 
         } catch (error) {
             console.log(error)
@@ -209,22 +209,18 @@ const EmprendimientosProvider = ({ children }) => {
         try {
             const token = localStorage.getItem('token')
             if (!token) return
-            const form = new FormData
-            for (let key in emprendimiento) {
-                form.append(key, emprendimiento[key])
-            }
+
             const config = {
                 headers: {
-                    "Content-type": "multipart/form-data",
+                    "content-type": "application/json",
                     Authorization: `Bearer ${token}`
                 }
             }
-            try {
-                const { data } = await clienteAxios.delete(`/emprendimientos/${id}`, config/*{
+            const { data } = await clienteAxios.delete(`/emprendimiento/${id}`, config)/*{
                     headers: {
                         "Content-type": "multipart/form-data"
                     }
-                }*/)
+                }*/
 
                 // Sincronizar el state
                 const emprendimientoActualizados = emprendimientos.filter(emprendimientoState => emprendimientoState._id !== id)
@@ -241,17 +237,15 @@ const EmprendimientosProvider = ({ children }) => {
                     //recargar
                     /*window.location.reload();*/
 
-                }, 3000)
+                }, 2000)
 
             } catch (error) {
                 console.log(error)
             }
 
 
-        } catch (error) {
-            console.log(error)
-        }
-    }
+        } 
+    
 
     return (
         <EmprendimientosContext.Provider

@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom"
 import FomularioEmprendimientos from "../components/FomularioEmprendimientos"
 import useEmprendimientos from "../hooks/useEmprendimientos"
 
-const EditarEmprendimiento = () => {
+const EliminarEmprendimiento = () => {
   const params = useParams()
 
   const { obtenerEmprendimiento, emprendimiento, cargando, eliminarEmprendimiento } = useEmprendimientos()
@@ -52,4 +52,4 @@ const EditarEmprendimiento = () => {
 
 }
 
-export default EditarEmprendimiento
+export default EliminarEmprendimiento
